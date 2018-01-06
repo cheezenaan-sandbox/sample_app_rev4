@@ -1,0 +1,69 @@
+AllCops:
+  DisplayStyleGuide: true
+  TargetRubyVersion: 2.4
+
+  Exclude:
+    - 'db/schema.rb'
+    - 'vendor/**/*'
+
+# Allow variable name starting with "_"
+Lint/UnderscorePrefixedVariableName:
+  Enabled: false
+
+Metrics/BlockLength:
+  CountComments: false
+  Max: 50
+  Exclude:
+    - "config/routes.rb"
+    - "Gemfile"
+    - "Guardfile"
+    - "Rakefile"
+    - "spec/**/*.rb"
+
+Metrics/AbcSize:
+  Max: 24
+
+Metrics/ClassLength:
+  CountComments: false
+  Max: 200
+
+Metrics/LineLength:
+  Max: 120
+  Exclude:
+    - "db/migrate/*"
+
+Metrics/MethodLength:
+  Max: 30
+  Exclude:
+    - "db/migrate/*"
+
+# Allow methods starting with "has_"
+Naming/PredicateName:
+  NamePrefixBlacklist:
+    - "is_"
+    - "have_"
+  NamePrefix:
+    - "is_"
+    - "have_"
+
+# Allow Japanese comments
+Style/AsciiComments:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false
+
+Style/MixinUsage:
+  Exclude:
+    - "bin/setup"
+    - "bin/update"
+
+Style/StringLiterals:
+  EnforcedStyle: double_quotes
+
+# Prefer trailing comma
+Style/TrailingCommaInArguments:
+  EnforcedStyleForMultiline: comma
+
+Style/TrailingCommaInLiteral:
+  EnforcedStyleForMultiline: comma

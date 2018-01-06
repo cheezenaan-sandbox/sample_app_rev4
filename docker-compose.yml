@@ -1,0 +1,33 @@
+version: '3'
+volumes:
+  app_data:
+  db_data:
+services:
+  app:
+    container_name: app
+    build:
+      context: .
+      dockerfile: ./docker/rails/Dockerfile.dev
+    command: bundle exec rails s -b 0.0.0.0 --pid tmp/pids/server.pid
+    environment:
+      DATABASE_HOST: db
+      DATABASE_USERNAME: root
+      DATABASE_PASSWORD: password
+    ports:
+      - 3000:3000
+    depends_on:
+      - db
+    volumes:
+      - .:/app:cached
+      - app_data:/app/vendor/bundle:cached
+
+  db:
+    image: mysql:5.7
+    container_name: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+    ports:
+      - 3306:3306
+    volumes:
+      - db_data:/var/lib/mysql:cached
+
