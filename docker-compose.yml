@@ -12,7 +12,6 @@ services:
     environment:
       DATABASE_HOST: db
       DATABASE_USERNAME: root
-      DATABASE_PASSWORD: password
     ports:
       - 3000:3000
     depends_on:
@@ -25,7 +24,7 @@ services:
     image: mysql:5.7
     container_name: mysql
     environment:
-      MYSQL_ROOT_PASSWORD: password
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
     ports:
       - 3306:3306
     volumes:

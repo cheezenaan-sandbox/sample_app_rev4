@@ -1,0 +1,19 @@
+version: '3'
+services:
+  travis_rspec:
+    build:
+      context: ../
+      dockerfile: docker/rails/Dockerfile.test
+    environment:
+      DATABASE_HOST: travis_mysql
+      DATABASE_USERNAME: root
+    ports: []
+    depends_on:
+      - travis_mysql
+
+  travis_mysql:
+    image: mysql:5.7
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+    ports:
+      - 3306:3306
