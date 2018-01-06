@@ -3,6 +3,16 @@
 require "rails_helper"
 
 RSpec.describe "StaticPages", type: :request do
+  describe "GET /" do
+    subject { response }
+
+    before do
+      get root_path
+    end
+
+    it { is_expected.to have_http_status(200) }
+  end
+
   describe "GET /static_pages/home" do
     subject { response }
 
