@@ -34,4 +34,14 @@ RSpec.feature "StaticPages", type: :feature do
       expect(page).to have_title "About | #{base_title}"
     end
   end
+
+  feature "Contact" do
+    before do
+      visit static_pages_contact_url
+    end
+
+    scenario "shows title" do
+      expect(page).to have_title "Contact | #{base_title}"
+    end
+  end
 end
