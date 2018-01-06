@@ -1,24 +1,32 @@
-# README
+# Ruby on Rails Tutorial sample application
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is the sample application based on
+[_Ruby on Rails Tutorial:
+Learn Web Development with Rails_](http://www.railstutorial.org/)
+by [Michael Hartl](http://www.michaelhartl.com/).
 
-Things you may want to cover:
+## Getting started
 
-* Ruby version
+To get started with the app, clone the repo and then install the needed gems:
 
-* System dependencies
+```
+$ docker-compose run --rm app bundle install
+```
 
-* Configuration
+Next, migrate the database:
 
-* Database creation
+```
+$ docker-compose run --rm app bin/rails db:migrate
+```
 
-* Database initialization
+Finally, run the test suite to verify that everything is working correctly:
 
-* How to run the test suite
+```
+$ docker-compose run --rm app bin/rspec
+```
 
-* Services (job queues, cache servers, search engines, etc.)
+If the test suite passes, you'll be ready to run the app in a local server:
 
-* Deployment instructions
-
-* ...
+```
+$ docker-compose up -d app
+```
