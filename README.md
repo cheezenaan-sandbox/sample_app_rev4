@@ -1,5 +1,7 @@
 # Ruby on Rails Tutorial sample application
 
+[![Build Status](https://travis-ci.org/cheezenaan/sample_app_rev4.svg?branch=master)](https://travis-ci.org/cheezenaan/sample_app_rev4)
+
 This is the sample application based on
 [_Ruby on Rails Tutorial:
 Learn Web Development with Rails_](http://www.railstutorial.org/)

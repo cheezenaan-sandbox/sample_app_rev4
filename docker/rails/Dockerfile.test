@@ -10,22 +10,33 @@ RUN set -x && \
   apk update && apk upgrade && \
   apk add --no-cache openssl wget build-base libxml2-dev libxslt-dev mysql-dev mysql-client nodejs tzdata chromium
 
-# Install Entrykit
+# Install Entrykit & Dockerize
 ENV ENTRYKIT_VERSION 0.4.0
+ENV DOCKERIZE_VERSION v0.3.0
 RUN wget https://github.com/progrium/entrykit/releases/download/v${ENTRYKIT_VERSION}/entrykit_${ENTRYKIT_VERSION}_Linux_x86_64.tgz \
+  # Entrykit
   && tar -xvzf entrykit_${ENTRYKIT_VERSION}_Linux_x86_64.tgz \
   && rm entrykit_${ENTRYKIT_VERSION}_Linux_x86_64.tgz \
   && mv entrykit /bin/entrykit \
   && chmod +x /bin/entrykit \
-  && entrykit --symlink
+  && entrykit --symlink \
+  # Dockerize
+  && wget https://github.com/jwilder/dockerize/releases/download/$DOCKERIZE_VERSION/dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz \
+  && tar -C /usr/local/bin -xzvf dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz \
+  && rm dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz
 
 ENV APP_ROOT /app
 WORKDIR $APP_ROOT
 
-RUN bundle config build.nokogiri --use-system-libraries
+COPY Gemfile Gemfile
+COPY Gemfile.lock Gemfile.lock
+
+RUN bundle config build.nokogiri --use-system-libraries && \
+    bundle install -j4 --quiet --path vendor/bundle
+
+COPY . $APP_ROOT
 
 ENTRYPOINT [ \
   "prehook", "ruby -v", "--", \
-  "prehook", "bundle install -j4 --quiet --path vendor/bundle", "--" \
-  "prehook", "rm /app/tmp/pids/server.pid", "--" \
+  "prehook", "dockerize -timeout 60s -wait tcp://${DATABASE_HOST}:3306", "--" \
 ]
