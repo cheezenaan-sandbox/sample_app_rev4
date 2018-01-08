@@ -11,7 +11,7 @@ RSpec.feature "StaticPages", type: :feature do
     end
 
     scenario "shows title" do
-      expect(page).to have_title "Home | #{base_title}"
+      expect(page).to have_title base_title
     end
   end
 
@@ -21,7 +21,7 @@ RSpec.feature "StaticPages", type: :feature do
     end
 
     scenario "shows title" do
-      expect(page).to have_title "Home | #{base_title}"
+      expect(page).to have_title base_title
     end
   end
 
