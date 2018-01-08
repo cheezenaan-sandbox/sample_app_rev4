@@ -16,3 +16,11 @@ before_install:
 script:
   - docker-compose -f .travis/docker-compose.yml run --rm travis_rspec
     bundle exec rspec --format progress
+
+
+branches:
+  only:
+    - master
+
+notification:
+  email: false
