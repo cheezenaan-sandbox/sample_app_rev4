@@ -26,6 +26,6 @@ RUN bundle config build.nokogiri --use-system-libraries
 
 ENTRYPOINT [ \
   "prehook", "ruby -v", "--", \
-  "prehook", "bundle install -j4 --quiet --path vendor/bundle", "--" \
-  "prehook", "rm /app/tmp/pids/server.pid", "--" \
+  "prehook", "bundle install -j4 --quiet --path vendor/bundle", "--", \
+  "prehook", "rm -f /app/tmp/pids/server.pid", "--" \
 ]
