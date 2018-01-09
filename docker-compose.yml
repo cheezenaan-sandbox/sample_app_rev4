@@ -3,7 +3,7 @@ volumes:
   app_data:
   db_data:
 services:
-  app:
+  app: &app_base
     container_name: app
     build:
       context: .
@@ -19,6 +19,14 @@ services:
     volumes:
       - .:/app:cached
       - app_data:/app/vendor/bundle:cached
+    tty: true
+    stdin_open: true
+
+  spring:
+    <<: *app_base
+    container_name: spring
+    command: bundle exec spring server
+    ports: []
 
   db:
     image: mysql:5.7
