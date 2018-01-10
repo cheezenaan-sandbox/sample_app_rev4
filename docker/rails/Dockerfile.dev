@@ -1,28 +1,35 @@
 # TODO: Bump Ruby to 2.5.0
 # ref. https://github.com/rails/spring/issues/550
-FROM ruby:2.4.3-alpine
+FROM ruby:2.4.3-alpine3.7
 LABEL maintainer "cheezenaan <cheezenaan@gmail.com>"
 
-ENV LANG C.UTF-8
+ENV \
+  APP_ROOT="/app" \
+  DEV_PACKAGES="build-base less libxml2-dev libxslt-dev tzdata" \
+  ENTRYKIT_VERSION="0.4.0" \
+  LANG="C.UTF-8" \
+  RAILS_PACKAGES="mysql-dev nodejs"
 
 # Install dependencies
-RUN set -x && \
-  apk update && apk upgrade && \
-  apk add --no-cache openssl wget build-base libxml2-dev libxslt-dev mysql-dev mysql-client nodejs tzdata chromium
+RUN \
+  set -x && \
+  apk update && apk upgrade && apk add --no-cache $DEV_PACKAGES $RAILS_PACKAGES && \
+
+# Set timezone
+  cp /usr/share/zoneinfo/Asia/Tokyo /etc/localtime && \
 
 # Install Entrykit
-ENV ENTRYKIT_VERSION 0.4.0
-RUN wget https://github.com/progrium/entrykit/releases/download/v${ENTRYKIT_VERSION}/entrykit_${ENTRYKIT_VERSION}_Linux_x86_64.tgz \
-  && tar -xvzf entrykit_${ENTRYKIT_VERSION}_Linux_x86_64.tgz \
-  && rm entrykit_${ENTRYKIT_VERSION}_Linux_x86_64.tgz \
-  && mv entrykit /bin/entrykit \
-  && chmod +x /bin/entrykit \
-  && entrykit --symlink
+  wget https://github.com/progrium/entrykit/releases/download/v${ENTRYKIT_VERSION}/entrykit_${ENTRYKIT_VERSION}_Linux_x86_64.tgz && \
+  tar -xvzf entrykit_${ENTRYKIT_VERSION}_Linux_x86_64.tgz && \
+  rm entrykit_${ENTRYKIT_VERSION}_Linux_x86_64.tgz && \
+  mv entrykit /bin/entrykit && \
+  chmod +x /bin/entrykit && \
+  entrykit --symlink && \
 
-ENV APP_ROOT /app
+# Settings for gems
+  bundle config build.nokogiri --use-system-libraries
+
 WORKDIR $APP_ROOT
-
-RUN bundle config build.nokogiri --use-system-libraries
 
 ENTRYPOINT [ \
   "prehook", "ruby -v", "--", \
