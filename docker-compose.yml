@@ -26,7 +26,15 @@ services:
     <<: *app_base
     container_name: spring
     command: bundle exec spring server
+    depends_on:
+      - db
+      - chrome
     ports: []
+
+  chrome:
+    image: selenium/standalone-chrome-debug
+    ports:
+      - 5900:5900
 
   db:
     image: mysql:5.7
@@ -37,4 +45,3 @@ services:
       - 3306:3306
     volumes:
       - db_data:/var/lib/mysql:cached
-

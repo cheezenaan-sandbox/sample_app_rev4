@@ -10,6 +10,12 @@ services:
     ports: []
     depends_on:
       - travis_mysql
+      - chrome
+
+  chrome:
+    image: selenium/standalone-chrome-debug
+    ports:
+      - 5900:5900
 
   travis_mysql:
     image: mysql:5.7
