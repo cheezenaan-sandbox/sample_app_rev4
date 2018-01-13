@@ -1,15 +1,16 @@
 version: '3'
 services:
-  travis_rspec:
+  spring:
     build:
       context: ../
       dockerfile: docker/rails/Dockerfile.test
+    command: bundle exec spring server
     environment:
-      DATABASE_HOST: travis_mysql
+      DATABASE_HOST: mysql
       DATABASE_USERNAME: root
     ports: []
     depends_on:
-      - travis_mysql
+      - mysql
       - chrome
 
   chrome:
@@ -17,7 +18,7 @@ services:
     ports:
       - 5900:5900
 
-  travis_mysql:
+  mysql:
     image: mysql:5.7
     environment:
       MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
