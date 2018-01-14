@@ -42,7 +42,6 @@ end
 group :test do
   gem "capybara", require: false
   gem "capybara-screenshot"
-  gem "database_cleaner"
   gem "factory_bot_rails"
   gem "guard"
   gem "guard-rspec", require: false

@@ -4,23 +4,22 @@ dist: trusty
 language: ruby
 rvm:
   - 2.4.3
-bundler_args: --jobs=4 --without production development --path vendor/bundle
 
 # TODO: Use MySQL on Travis CI
 before_install:
   - sudo service mysql stop
-  - docker-compose -f .travis/docker-compose.yml build travis_rspec
-  - docker-compose -f .travis/docker-compose.yml run --rm travis_rspec
-    bin/rails db:create db:migrate
+
+install:
+  - docker-compose -f .travis/docker-compose.yml build
+  - docker-compose -f .travis/docker-compose.yml up -d
 
 script:
-  - docker-compose -f .travis/docker-compose.yml run --rm travis_rspec
-    bundle exec rspec --format progress
-
+  - docker-compose -f .travis/docker-compose.yml run --rm spring bin/rails db:create db:migrate
+  - docker-compose -f .travis/docker-compose.yml exec spring rspec --format progress
 
 branches:
   only:
     - master
 
-notification:
+notifications:
   email: false
