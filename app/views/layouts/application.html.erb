@@ -1,14 +1,37 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title><%= full_title yield(:title) %></title>
-    <%= csrf_meta_tags %>
 
+<head>
+  <title>
+    <%= full_title yield(:title) %>
+  </title>
+  <%= csrf_meta_tags %>
     <%= stylesheet_link_tag    'application', media: 'all' %>
-    <%= javascript_include_tag 'application' %>
-  </head>
+      <%= javascript_include_tag 'application' %>
+</head>
 
-  <body>
+<body>
+  <header class="navbar navbar-fixed-top navbar-inverse">
+    <div class="container">
+      <%= link_to "sample app", "#", id: "logo" %>
+        <nav>
+          <ul class="nav navbar-nav navbar-right">
+            <li>
+              <%= link_to "Home",   '#' %>
+            </li>
+            <li>
+              <%= link_to "Help",   '#' %>
+            </li>
+            <li>
+              <%= link_to "Log in", '#' %>
+            </li>
+          </ul>
+        </nav>
+    </div>
+  </header>
+  <div class="container">
     <%= yield %>
-  </body>
+  </div>
+</body>
+
 </html>
