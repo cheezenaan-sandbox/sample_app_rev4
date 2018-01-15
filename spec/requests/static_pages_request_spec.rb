@@ -11,6 +11,7 @@ RSpec.describe "StaticPages", type: :request do
     end
 
     it { is_expected.to have_http_status(200) }
+    it { is_expected.to render_template(:home) }
   end
 
   describe "GET /help" do
