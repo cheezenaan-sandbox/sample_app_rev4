@@ -46,6 +46,7 @@ group :test do
   gem "factory_bot_rails"
   gem "guard"
   gem "guard-rspec", require: false
+  gem "rails-controller-testing"
   gem "rspec-its"
   gem "rspec-rails"
   gem "selenium-webdriver", require: false
