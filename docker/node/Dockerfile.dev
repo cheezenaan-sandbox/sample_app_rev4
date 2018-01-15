@@ -1,0 +1,7 @@
+FROM node:9.4.0-alpine
+LABEL maintainer "cheezenaan <cheezenaan@gmail.com>"
+
+ENV \
+  APP_ROOT="/app"
+
+WORKDIR ${APP_ROOT}/frontend

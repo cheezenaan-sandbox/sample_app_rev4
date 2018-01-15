@@ -1,0 +1,8 @@
+{
+  "name": "sample_app",
+  "version": "1.0.0",
+  "description": "Sample application",
+  "main": "index.js",
+  "author": "cheezenaan",
+  "license": "MIT"
+}
