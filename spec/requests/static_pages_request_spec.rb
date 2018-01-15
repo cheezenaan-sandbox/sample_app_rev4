@@ -11,43 +11,34 @@ RSpec.describe "StaticPages", type: :request do
     end
 
     it { is_expected.to have_http_status(200) }
+    it { is_expected.to render_template(:home) }
   end
 
-  describe "GET /static_pages/home" do
+  describe "GET /help" do
     subject { response }
 
     before do
-      get static_pages_home_path
+      get help_path
     end
 
     it { is_expected.to have_http_status(200) }
   end
 
-  describe "GET /static_pages/help" do
+  describe "GET /about" do
     subject { response }
 
     before do
-      get static_pages_help_path
+      get about_path
     end
 
     it { is_expected.to have_http_status(200) }
   end
 
-  describe "GET /static_pages/about" do
+  describe "GET /contact" do
     subject { response }
 
     before do
-      get static_pages_about_path
-    end
-
-    it { is_expected.to have_http_status(200) }
-  end
-
-  describe "GET /static_pages/contact" do
-    subject { response }
-
-    before do
-      get static_pages_contact_path
+      get contact_path
     end
 
     it { is_expected.to have_http_status(200) }

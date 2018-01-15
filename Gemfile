@@ -7,6 +7,7 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
+gem "bootstrap-sass"
 gem "jbuilder", "~> 2.5"
 gem "mysql2", ">= 0.3.18", "< 0.5"
 gem "puma", "~> 3.7"
@@ -45,6 +46,7 @@ group :test do
   gem "factory_bot_rails"
   gem "guard"
   gem "guard-rspec", require: false
+  gem "rails-controller-testing"
   gem "rspec-its"
   gem "rspec-rails"
   gem "selenium-webdriver", require: false
