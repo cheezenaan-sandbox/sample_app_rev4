@@ -136,3 +136,6 @@ node_modules/
 
 # Rails application template
 /templates
+
+# Ignore assets bundled by webpack
+/public/assets

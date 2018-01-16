@@ -4,5 +4,14 @@
   "description": "Sample application",
   "main": "index.js",
   "author": "cheezenaan",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-env": "^1.6.1",
+    "webpack": "^3.10.0"
+  },
+  "scripts": {
+    "build": "webpack --config ./config/webpack.config.js"
+  }
 }
