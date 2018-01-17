@@ -37,6 +37,7 @@ services:
     build:
       context: .
       dockerfile: ./docker/node/Dockerfile.dev
+    command: yarn watch
     ports:
       - 4000:4000
     volumes:

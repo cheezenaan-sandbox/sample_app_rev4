@@ -11,12 +11,18 @@
     "babel-preset-env": "^1.6.1",
     "eslint": "^4.9.0",
     "eslint-config-airbnb": "16.1.0",
+    "eslint-config-prettier": "^2.9.0",
     "eslint-plugin-import": "^2.7.0",
     "eslint-plugin-jsx-a11y": "^6.0.2",
+    "eslint-plugin-prettier": "^2.5.0",
     "eslint-plugin-react": "^7.4.0",
+    "prettier": "^1.10.2",
     "webpack": "^3.10.0"
   },
   "scripts": {
-    "build": "webpack --config ./config/webpack.config.js"
+    "build": "webpack --config ./config/webpack.config.js",
+    "watch": "webpack --progress --watch --config ./config/webpack.config.js",
+    "format": "prettier --write 'src/**/*.{js,css}'",
+    "lint": "eslint src"
   }
 }
