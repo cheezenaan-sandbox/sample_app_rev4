@@ -7,15 +7,15 @@
   </title>
   <%= csrf_meta_tags %>
   <%= stylesheet_link_tag    'application', media: 'all' %>
-  <%= javascript_include_tag 'application' %>
+  <%= javascript_include_tag 'application', frontend_asset_path("frontend/application.js") %>
 </head>
 
 <body>
   <%= render "layouts/header" %>
-    <div class="container">
-      <%= yield %>
-      <%= render  "layouts/footer" %>
-    </div>
+  <div class="container">
+    <%= yield %>
+    <%= render  "layouts/footer" %>
+  </div>
 </body>
 
 </html>

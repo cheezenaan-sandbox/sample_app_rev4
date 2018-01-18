@@ -1,9 +1,10 @@
 const path = require('path');
+const ManifestPlugin = require('webpack-manifest-plugin');
 
 module.exports = {
   entry: { 'frontend/application': ['./src/javascripts/application/index.js'] },
   output: {
-    filename: '[name].js',
+    filename: '[name].js', // TODO: define as [name]_[hash] when production
     path: path.resolve(__dirname, '../../public/assets'),
   },
   module: {
@@ -15,6 +16,7 @@ module.exports = {
       },
     ],
   },
+  plugins: [new ManifestPlugin({ fileName: 'webpack-manifest.json' })],
   resolve: {
     extensions: ['.js', '.jsx'],
   },
