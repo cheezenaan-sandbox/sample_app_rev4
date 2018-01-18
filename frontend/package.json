@@ -17,11 +17,13 @@
     "eslint-plugin-prettier": "^2.5.0",
     "eslint-plugin-react": "^7.4.0",
     "prettier": "^1.10.2",
+    "rimraf": "^2.6.2",
     "webpack": "^3.10.0",
     "webpack-manifest-plugin": "^1.3.2"
   },
   "scripts": {
     "build": "webpack --config ./config/webpack.config.js",
+    "clean": "rimraf '../public/assets/frontend/**/*.{js,css}'",
     "format": "prettier --write 'src/**/*.{js,css}'",
     "lint": "eslint src",
     "watch": "webpack --progress --watch --config ./config/webpack.config.js"
