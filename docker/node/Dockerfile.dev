@@ -5,3 +5,5 @@ ENV \
   APP_ROOT="/app"
 
 WORKDIR ${APP_ROOT}/frontend
+
+# TODO: Divide Dockerfile into development and test(prod) environments

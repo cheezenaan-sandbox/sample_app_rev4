@@ -10,12 +10,15 @@ before_install:
   - sudo service mysql stop
 
 install:
-  - docker-compose -f .travis/docker-compose.yml build
-  - docker-compose -f .travis/docker-compose.yml up -d
+  - docker-compose -f .travis/docker-compose.yml run --rm node yarn install
+
+before_script:
+  - docker-compose -f .travis/docker-compose.yml run --rm node /bin/sh -c "yarn lint && yarn build"
+  - docker-compose -f .travis/docker-compose.yml build spring
+  - docker-compose -f .travis/docker-compose.yml run --rm spring bin/rails db:create db:migrate
 
 script:
-  - docker-compose -f .travis/docker-compose.yml run --rm spring bin/rails db:create db:migrate
-  - docker-compose -f .travis/docker-compose.yml exec spring rspec --format progress
+  - docker-compose -f .travis/docker-compose.yml run --rm spring rspec --format progress
 
 branches:
   only:
