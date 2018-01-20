@@ -17,6 +17,7 @@ services:
       - 3000:3000
     depends_on:
       - db
+      - node
     volumes:
       - .:/app:cached
       - app_data:/app/vendor/bundle:cached

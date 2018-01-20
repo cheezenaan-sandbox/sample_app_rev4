@@ -21,4 +21,7 @@ module.exports = {
     extensions: ['.js', '.jsx'],
   },
   devtool: 'cheap-module-source-map',
+  devServer: {
+    contentBase: path.resolve(__dirname, '../../public/assets'),
+  },
 };
