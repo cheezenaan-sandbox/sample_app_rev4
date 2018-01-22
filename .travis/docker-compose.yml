@@ -3,7 +3,7 @@ services:
   spring:
     build:
       context: ../
-      dockerfile: docker/rails/Dockerfile.test
+      dockerfile: ./docker/rails/Dockerfile.test
     command: bundle exec spring server
     environment:
       DATABASE_HOST: mysql
@@ -12,11 +12,20 @@ services:
     depends_on:
       - mysql
       - chrome
+      - node
 
   chrome:
     image: selenium/standalone-chrome-debug
     ports:
       - 5900:5900
+
+  node:
+    build:
+      context: ../
+      dockerfile: ./docker/node/Dockerfile.dev
+    volumes:
+      - ../frontend/:/app/frontend/
+      - ../public/assets/:/app/public/assets
 
   mysql:
     image: mysql:5.7

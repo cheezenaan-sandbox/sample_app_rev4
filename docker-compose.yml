@@ -2,6 +2,7 @@ version: '3'
 volumes:
   app_data:
   db_data:
+  node_modules:
 services:
   app: &app_base
     container_name: app
@@ -16,6 +17,7 @@ services:
       - 3000:3000
     depends_on:
       - db
+      - node
     volumes:
       - .:/app:cached
       - app_data:/app/vendor/bundle:cached
@@ -30,6 +32,19 @@ services:
       - db
       - chrome
     ports: []
+
+  node:
+    container_name: node
+    build:
+      context: .
+      dockerfile: ./docker/node/Dockerfile.dev
+    command: yarn watch
+    ports:
+      - 4000:4000
+    volumes:
+      - ./frontend/:/app/frontend:cached
+      - ./frontend/node_modules:/app/frontend/node_modules:cached
+      - ./public/assets/:/app/public/assets:cached
 
   chrome:
     image: selenium/standalone-chrome-debug
