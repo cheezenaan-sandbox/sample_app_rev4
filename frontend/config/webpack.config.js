@@ -1,6 +1,7 @@
 const path = require('path');
 const ManifestPlugin = require('webpack-manifest-plugin');
 const UglifyJSPlugin = require('uglify-js-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const isProduction = process.env.NODE_ENV === 'production';
 const fileName = isProduction ? '[name]_[hash]' : '[name]';
@@ -12,13 +13,15 @@ const UglifyJS = new UglifyJSPlugin({
   sourceMap: !isProduction,
   warnings: false,
 });
+const ExtractCSS = new ExtractTextPlugin(`${fileName}.css`);
 
-const plugins = [Manifest];
+const plugins = [Manifest, ExtractCSS];
 const pluginsForProudction = plugins.concat(UglifyJS);
 
 module.exports = {
   entry: {
     'frontend/application': ['./src/javascripts/application/index.js'],
+    'frontend/layouts/application': ['./src/stylesheets/application.scss'],
   },
   output: {
     filename: `${fileName}.js`,
@@ -27,9 +30,16 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /.js$/,
+        test: /\.js$/,
         exclude: /node_modules|bower_components/,
         loader: 'babel-loader',
+      },
+      {
+        test: /\.s?css$/,
+        use: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: ['css-loader', 'postcss-loader', 'sass-loader'],
+        }),
       },
     ],
   },

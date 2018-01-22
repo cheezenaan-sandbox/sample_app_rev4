@@ -6,7 +6,7 @@
     <%= full_title yield(:title) %>
   </title>
   <%= csrf_meta_tags %>
-  <%= stylesheet_link_tag    'application', media: 'all' %>
+  <%= stylesheet_link_tag    'application', frontend_asset_path("frontend/layouts/application.css"), media: 'all' %>
   <%= javascript_include_tag 'application', frontend_asset_path("frontend/application.js") %>
 </head>
 
