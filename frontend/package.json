@@ -36,7 +36,9 @@
     "format": "prettier --write 'src/**/*.{js,css}'",
     "lint": "eslint src",
     "publish": "yarn clean && NODE_ENV=production yarn build",
-    "watch":
-      "webpack-dev-server --config ./config/webpack.config.js --host 0.0.0.0 --port 4000 --colors --inline --progress"
+    "watch": "webpack-dev-server --config ./config/webpack.config.js --host 0.0.0.0 --port 4000 --colors --inline --progress"
+  },
+  "dependencies": {
+    "bootstrap-sass": "^3.3.7"
   }
 }
