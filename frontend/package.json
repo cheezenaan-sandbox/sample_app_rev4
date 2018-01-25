@@ -19,6 +19,7 @@
     "eslint-plugin-prettier": "^2.5.0",
     "eslint-plugin-react": "^7.4.0",
     "extract-text-webpack-plugin": "^3.0.2",
+    "file-loader": "^1.1.6",
     "node-sass": "^4.7.2",
     "postcss-loader": "^2.0.10",
     "prettier": "^1.10.2",
@@ -32,11 +33,12 @@
   },
   "scripts": {
     "build": "webpack --config ./config/webpack.config.js",
-    "clean": "rimraf '../public/assets/frontend/**/*.{js,css}'",
+    "clean": "rimraf '../public/assets/frontend/**/*.*'",
     "format": "prettier --write 'src/**/*.{js,css}'",
     "lint": "eslint src",
     "publish": "yarn clean && NODE_ENV=production yarn build",
-    "watch": "webpack-dev-server --config ./config/webpack.config.js --host 0.0.0.0 --port 4000 --colors --inline --progress"
+    "watch":
+      "webpack-dev-server --config ./config/webpack.config.js --host 0.0.0.0 --port 4000 --colors --inline --progress"
   },
   "dependencies": {
     "bootstrap-sass": "^3.3.7"
