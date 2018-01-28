@@ -36,7 +36,7 @@
     "clean": "rimraf '../public/assets/frontend/**/*.*'",
     "format": "prettier --write 'src/**/*.{js,css}'",
     "lint": "eslint src",
-    "publish": "yarn clean && NODE_ENV=production yarn build",
+    "release": "yarn clean && NODE_ENV=production yarn build",
     "watch":
       "webpack-dev-server --config ./config/webpack.config.js --host 0.0.0.0 --port 4000 --colors --inline --progress"
   },

@@ -21,8 +21,11 @@ const pluginsForProudction = plugins.concat(UglifyJS);
 
 module.exports = {
   entry: {
-    'frontend/application': ['./src/javascripts/application/index.js'],
-    'frontend/layouts/application': ['./src/stylesheets/application.scss'],
+    'frontend/layouts/application': [
+      './src/stylesheets/application.scss',
+      './src/javascripts/application/index.js',
+    ],
+    'frontend/home': ['./src/images/rails.png'],
   },
   output: {
     filename: `${fileName}.js`,
