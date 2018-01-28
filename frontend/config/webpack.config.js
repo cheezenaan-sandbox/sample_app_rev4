@@ -6,7 +6,6 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const isProduction = process.env.NODE_ENV === 'production';
 const fileName = isProduction ? '[name]_[hash]' : '[name]';
 const destinationPath = path.resolve(__dirname, '../../public/assets');
-const publicPath = isProduction ? '/assets/' : 'http://0.0.0.0:4000/assets/';
 
 const Manifest = new ManifestPlugin({ fileName: 'webpack-manifest.json' });
 const UglifyJS = new UglifyJSPlugin({
@@ -30,7 +29,6 @@ module.exports = {
   output: {
     filename: `${fileName}.js`,
     path: destinationPath,
-    publicPath,
   },
   module: {
     rules: [
@@ -54,7 +52,7 @@ module.exports = {
             options: {
               name: `${fileName}.[ext]`,
               outputPath: 'frontend/images/',
-              publicPath,
+              publicPath: '/assets/',
             },
           },
         ],
@@ -65,6 +63,5 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.jsx'],
   },
-  devServer: isProduction ? {} : { contentBase: destinationPath },
   devtool: isProduction ? 'eval' : 'cheap-module-source-map',
 };
