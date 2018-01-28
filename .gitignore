@@ -139,3 +139,5 @@ node_modules/
 
 # Ignore assets bundled by webpack
 /public/assets
+
+yarn-error.log
