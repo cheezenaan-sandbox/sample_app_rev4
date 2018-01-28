@@ -5,7 +5,6 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const isProduction = process.env.NODE_ENV === 'production';
 const fileName = isProduction ? '[name]_[hash]' : '[name]';
-const destinationPath = path.resolve(__dirname, '../../public/assets');
 
 const Manifest = new ManifestPlugin({ fileName: 'webpack-manifest.json' });
 const UglifyJS = new UglifyJSPlugin({
@@ -20,15 +19,15 @@ const pluginsForProudction = plugins.concat(UglifyJS);
 
 module.exports = {
   entry: {
-    'frontend/layouts/application': [
-      './src/stylesheets/application.scss',
+    'layouts/application': [
       './src/javascripts/application/index.js',
+      './src/stylesheets/application.scss',
     ],
-    'frontend/home': ['./src/images/rails.png'],
+    home: ['./src/images/rails.png'],
   },
   output: {
     filename: `${fileName}.js`,
-    path: destinationPath,
+    path: path.resolve(__dirname, '../../public/assets/frontend'),
   },
   module: {
     rules: [
@@ -51,7 +50,7 @@ module.exports = {
             loader: 'file-loader',
             options: {
               name: `${fileName}.[ext]`,
-              outputPath: 'frontend/images/',
+              outputPath: 'images/',
               publicPath: '/assets/',
             },
           },

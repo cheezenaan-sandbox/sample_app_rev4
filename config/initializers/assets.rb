@@ -15,5 +15,5 @@ Rails.application.config.assets.version = "1.0"
 # folder are already added.
 # Rails.application.config.assets.precompile += %w( admin.js admin.css )
 
-manifest = Rails.root.join("public", "assets", "webpack-manifest.json")
+manifest = Rails.root.join("public", "assets", "frontend", "webpack-manifest.json")
 Rails.application.config.assets_manifest = JSON.parse(File.read(manifest)) if File.exist?(manifest)

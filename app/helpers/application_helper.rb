@@ -7,12 +7,11 @@ module ApplicationHelper
   end
 
   def frontend_asset_path(path)
-    manifest = Rails.application.config.assets_manifest
+    app = Rails.application
+    manifest = app.config.assets_manifest
     return unless manifest.fetch(path, false)
 
-    routes = Rails.application.routes.url_helpers
-    host = Rails.application.config.action_controller.asset_host || routes.root_path
-
-    Pathname.new(host).join("assets", manifest[path])
+    host = app.config.action_controller.asset_host || app.routes.url_helpers.root_path
+    Pathname.new(host).join("assets", "frontend", manifest[path])
   end
 end
