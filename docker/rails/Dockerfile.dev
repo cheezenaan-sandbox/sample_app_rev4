@@ -8,25 +8,25 @@ ENV \
   DEV_PACKAGES="build-base less libxml2-dev libxslt-dev tzdata" \
   ENTRYKIT_VERSION="0.4.0" \
   LANG="C.UTF-8" \
-  RAILS_PACKAGES="mysql-dev nodejs"
+  RAILS_PACKAGES="mysql-dev"
 
 # Install dependencies
 RUN \
   set -x && \
   apk update && apk upgrade && apk add --no-cache $DEV_PACKAGES $RAILS_PACKAGES && \
-
-# Set timezone
+  #
+  # Set timezone
   cp /usr/share/zoneinfo/Asia/Tokyo /etc/localtime && \
-
-# Install Entrykit
+  #
+  # Install Entrykit
   wget https://github.com/progrium/entrykit/releases/download/v${ENTRYKIT_VERSION}/entrykit_${ENTRYKIT_VERSION}_Linux_x86_64.tgz && \
   tar -xvzf entrykit_${ENTRYKIT_VERSION}_Linux_x86_64.tgz && \
   rm entrykit_${ENTRYKIT_VERSION}_Linux_x86_64.tgz && \
   mv entrykit /bin/entrykit && \
   chmod +x /bin/entrykit && \
   entrykit --symlink && \
-
-# Settings for gems
+  #
+  # Settings for gems
   bundle config build.nokogiri --use-system-libraries
 
 WORKDIR $APP_ROOT
@@ -35,4 +35,4 @@ ENTRYPOINT [ \
   "prehook", "ruby -v", "--", \
   "prehook", "bundle install -j4 --quiet --path vendor/bundle", "--", \
   "prehook", "rm -f /app/tmp/pids/server.pid", "--" \
-]
+  ]

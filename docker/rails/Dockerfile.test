@@ -9,7 +9,7 @@ ENV \
   DOCKERIZE_VERSION="v0.3.0" \
   ENTRYKIT_VERSION="0.4.0" \
   LANG="C.UTF-8" \
-  RAILS_PACKAGES="mysql-dev nodejs"
+  RAILS_PACKAGES="mysql-dev"
 
 WORKDIR $APP_ROOT
 
@@ -20,11 +20,11 @@ COPY Gemfile.lock Gemfile.lock
 RUN \
   set -x && \
   apk update && apk upgrade && apk add --no-cache $DEV_PACKAGES $RAILS_PACKAGES && \
-
-# Set timezone
+  #
+  # Set timezone
   cp /usr/share/zoneinfo/Asia/Tokyo /etc/localtime && \
-
-# Install Entrykit & Dockerize
+  #
+  # Install Entrykit & Dockerize
   wget https://github.com/progrium/entrykit/releases/download/v${ENTRYKIT_VERSION}/entrykit_${ENTRYKIT_VERSION}_Linux_x86_64.tgz && \
   tar -xvzf entrykit_${ENTRYKIT_VERSION}_Linux_x86_64.tgz && \
   rm entrykit_${ENTRYKIT_VERSION}_Linux_x86_64.tgz && \
@@ -34,8 +34,8 @@ RUN \
   wget https://github.com/jwilder/dockerize/releases/download/$DOCKERIZE_VERSION/dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz && \
   tar -C /usr/local/bin -xzvf dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz && \
   rm dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz && \
-
-# Install gems
+  #
+  # Install gems
   bundle config build.nokogiri --use-system-libraries && \
   bundle install -j4 --quiet --path vendor/bundle
 
@@ -44,4 +44,4 @@ COPY . $APP_ROOT
 ENTRYPOINT [ \
   "prehook", "ruby -v", "--", \
   "prehook", "dockerize -timeout 60s -wait tcp://${DATABASE_HOST}:3306", "--" \
-]
+  ]
