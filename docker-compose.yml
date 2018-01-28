@@ -39,8 +39,6 @@ services:
       context: .
       dockerfile: ./docker/node/Dockerfile.dev
     command: yarn watch
-    ports:
-      - 4000:4000
     volumes:
       - ./frontend/:/app/frontend:cached
       - ./frontend/node_modules:/app/frontend/node_modules:cached
