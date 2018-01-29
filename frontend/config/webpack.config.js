@@ -23,7 +23,7 @@ module.exports = {
       './src/javascripts/application/index.js',
       './src/stylesheets/application.scss',
     ],
-    home: ['./src/images/rails.png'],
+    'static_pages/home': ['./src/images/rails.png'],
   },
   output: {
     filename: `${fileName}.js`,
