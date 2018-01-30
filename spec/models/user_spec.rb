@@ -47,5 +47,19 @@ RSpec.describe User, type: :model do
       let(:email) { "#{'a' * 244}@example.com" }
       it { is_expected.to be_invalid }
     end
+
+    context "when email format is invalid" do
+      %w[user@example,com user_at_foo.org user.name@example. foo@bar_baz.com foo@bar+baz.com foo@bar..baz.com].each do |invalid_address|
+        let(:email) { invalid_address }
+        it { is_expected.to be_invalid }
+      end
+    end
+
+    context "when email format is valid" do
+      %w[user@foo.COM A_US-ER@f.b.org frst.lst@foo.jp a+b@baz.cn].each do |valid_address|
+        let(:email) { valid_address }
+        it { is_expected.to be_valid }
+      end
+    end
   end
 end
