@@ -16,7 +16,12 @@ RSpec.describe User, type: :model do
       it { is_expected.to be_invalid }
     end
 
-    context "when name is present" do
+    context "when name is too long" do
+      let(:name) { "a" * 51 }
+      it { is_expected.to be_invalid }
+    end
+
+    context "when name is moderate" do
       let(:name) { "Kumiko Oumae" }
 
       it { is_expected.to be_valid }
@@ -29,6 +34,11 @@ RSpec.describe User, type: :model do
 
     context "when email is blank" do
       let(:email) { "" }
+      it { is_expected.to be_invalid }
+    end
+
+    context "when email is too long" do
+      let(:email) { "#{'a' * 244}@example.com" }
       it { is_expected.to be_invalid }
     end
 
