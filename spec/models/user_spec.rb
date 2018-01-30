@@ -61,5 +61,16 @@ RSpec.describe User, type: :model do
         it { is_expected.to be_valid }
       end
     end
+
+    context "when email is duplicated" do
+      let(:email) { "anime-eupho@example.com" }
+      before do
+        user_with_duplicated_email = user.dup
+        user_with_duplicated_email.email = user.email.upcase
+        user_with_duplicated_email.save
+      end
+
+      it { is_expected.to be_invalid }
+    end
   end
 end
