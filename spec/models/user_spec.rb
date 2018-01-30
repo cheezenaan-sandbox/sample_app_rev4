@@ -72,5 +72,15 @@ RSpec.describe User, type: :model do
 
       it { is_expected.to be_invalid }
     end
+
+    context "when email contains upcase letters" do
+      let(:email) { "ANIME-EUPHO@example.com" }
+      before do
+        user.email = email
+        user.save
+      end
+
+      its(:email) { is_expected.to eq email.downcase }
+    end
   end
 end
