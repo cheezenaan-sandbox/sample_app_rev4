@@ -2,6 +2,7 @@
   "name": "sample_app_rev4",
   "description": "",
   "scripts": {
+    "postdeploy": "bundle exec rails db:migrate"
   },
   "env": {
     "LANG": {
@@ -32,9 +33,7 @@
       "quantity": 1
     }
   },
-  "addons": [
-
-  ],
+  "addons": [],
   "buildpacks": [
     {
       "url": "heroku/nodejs"
