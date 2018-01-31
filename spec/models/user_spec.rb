@@ -4,7 +4,10 @@ require "rails_helper"
 
 RSpec.describe User, type: :model do
   # TODO: Introduce factory_bot
-  let(:user) { User.new(name: name, email: email) }
+  let(:user) do
+    User.new(name: name, email: email,
+             password: "eupho", password_confirmation: "eupho")
+  end
   subject { user }
 
   describe "#name" do
