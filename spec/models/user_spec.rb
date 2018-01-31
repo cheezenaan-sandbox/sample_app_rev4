@@ -6,12 +6,13 @@ RSpec.describe User, type: :model do
   # TODO: Introduce factory_bot
   let(:user) do
     User.new(name: name, email: email,
-             password: "eupho", password_confirmation: "eupho")
+             password: password, password_confirmation: password)
   end
   subject { user }
 
   describe "#name" do
     let(:email) { "anime-eupho@example.com" }
+    let(:password) { "euphonium" }
 
     context "when name is moderate" do
       let(:name) { "Kumiko Oumae" }
@@ -34,6 +35,7 @@ RSpec.describe User, type: :model do
 
   describe "#email" do
     let(:name) { "Kumiko Oumae" }
+    let(:password) { "euphonium" }
 
     context "when email is moderate" do
       let(:email) { "anime-eupho@example.com" }
@@ -84,6 +86,23 @@ RSpec.describe User, type: :model do
       end
 
       its(:email) { is_expected.to eq email.downcase }
+    end
+  end
+
+  describe "#password" do
+    let(:name) { "Kumiko Oumae" }
+    let(:email) { "anime-eupho@example.com" }
+
+    context "when password is blank" do
+      let(:password) { " " * 6 }
+
+      it { is_expected.to be_invalid }
+    end
+
+    context "when password is less than minimum length" do
+      let(:password) { "a" * 5 }
+
+      it { is_expected.to be_invalid }
     end
   end
 end
