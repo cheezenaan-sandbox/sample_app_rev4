@@ -3,8 +3,9 @@ AllCops:
   TargetRubyVersion: 2.4
 
   Exclude:
-    - 'db/schema.rb'
-    - 'vendor/**/*'
+    - "db/schema.rb"
+    - "vendor/**/*"
+    - "frontend/**/*"
 
 # Allow variable name starting with "_"
 Lint/UnderscorePrefixedVariableName:
