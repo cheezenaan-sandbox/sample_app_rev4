@@ -18,13 +18,13 @@ RSpec.describe UsersHelper do
                  password: "euphonium", password_confirmation: "euphonium")
       end
 
-      context "email is blank" do
+      context "when email is blank" do
         let(:email) { "" }
 
         it { is_expected.to eq nil }
       end
 
-      context "email is present" do
+      context "when email is present" do
         let(:email) { "anime-eupho@example.com" }
         let(:default_size) { 80 }
 

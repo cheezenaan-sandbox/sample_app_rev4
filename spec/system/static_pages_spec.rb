@@ -3,8 +3,9 @@
 require "rails_helper"
 
 RSpec.describe "StaticPages", type: :system do
-  let(:base_title) { "Ruby on Rails Tutorial Sample App" }
   subject { page }
+
+  let(:base_title) { "Ruby on Rails Tutorial Sample App" }
 
   describe "Home page" do
     before { visit root_path }
