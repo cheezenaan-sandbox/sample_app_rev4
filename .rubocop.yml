@@ -1,3 +1,5 @@
+require: rubocop-rspec
+
 AllCops:
   DisplayStyleGuide: true
   TargetRubyVersion: 2.4
@@ -10,6 +12,12 @@ AllCops:
 # Allow variable name starting with "_"
 Lint/UnderscorePrefixedVariableName:
   Enabled: false
+
+# ref. https://github.com/bbatsov/ruby-style-guide#indent-conditional-assignment
+Lint/EndAlignment:
+  Enabled: true
+  EnforcedStyleAlignWith: keyword
+  AutoCorrect: true
 
 Metrics/BlockLength:
   CountComments: false
@@ -68,3 +76,9 @@ Style/TrailingCommaInArguments:
 
 Style/TrailingCommaInLiteral:
   EnforcedStyleForMultiline: comma
+
+RSpec/NamedSubject:
+  Enabled: false
+
+RSpec/NestedGroups:
+  Max: 4

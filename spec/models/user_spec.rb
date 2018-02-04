@@ -4,11 +4,12 @@ require "rails_helper"
 
 RSpec.describe User, type: :model do
   # TODO: Introduce factory_bot
+  subject { user }
+
   let(:user) do
     User.new(name: name, email: email,
              password: password, password_confirmation: password)
   end
-  subject { user }
 
   describe "#name" do
     let(:email) { "anime-eupho@example.com" }
@@ -29,6 +30,7 @@ RSpec.describe User, type: :model do
 
     context "when name is too long" do
       let(:name) { "a" * 51 }
+
       it { is_expected.to be_invalid }
     end
   end
@@ -39,17 +41,20 @@ RSpec.describe User, type: :model do
 
     context "when email is moderate" do
       let(:email) { "anime-eupho@example.com" }
+
       it { is_expected.to be_valid }
       its(:email) { is_expected.to eq "anime-eupho@example.com" }
     end
 
     context "when email is blank" do
       let(:email) { "" }
+
       it { is_expected.to be_invalid }
     end
 
     context "when email is too long" do
       let(:email) { "#{'a' * 244}@example.com" }
+
       it { is_expected.to be_invalid }
     end
 
@@ -69,6 +74,7 @@ RSpec.describe User, type: :model do
 
     context "when email is duplicated" do
       let(:email) { "anime-eupho@example.com" }
+
       before do
         user_with_duplicated_email = user.dup
         user_with_duplicated_email.email = user.email.upcase
@@ -80,6 +86,7 @@ RSpec.describe User, type: :model do
 
     context "when email contains upcase letters" do
       let(:email) { "ANIME-EUPHO@example.com" }
+
       before do
         user.email = email
         user.save

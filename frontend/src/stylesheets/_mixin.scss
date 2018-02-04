@@ -4,3 +4,7 @@
 @import '~bootstrap-sass/assets/stylesheets/bootstrap';
 
 $gray-medium-light: #eaeaea;
+
+@mixin box_sizing {
+  box-sizing: border-box;
+}
