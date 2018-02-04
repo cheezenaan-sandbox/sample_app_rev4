@@ -14,21 +14,15 @@ RSpec.describe "/users", type: :request do
   end
 
   describe "POST /signup" do
-    subject(:signup_request) { -> { post signup_path, params: params } }
+    subject(:signup_request) { -> { post signup_path, params: { user: user } } }
 
-    let(:params) do
+    let(:user) do
       {
-        user: {
-          name: name,
-          email: email,
-          password: password,
-          password_confirmation: password,
-        },
+        name: name,
+        email: email,
+        password: password,
+        password_confirmation: password,
       }
-    end
-
-    before do
-      signup_request.call
     end
 
     context "with invalid information" do
@@ -36,8 +30,24 @@ RSpec.describe "/users", type: :request do
       let(:email) { "some@foo" }
       let(:password) { "eupho" }
 
-      it { is_expected.to render_template(:new) }
-      it { is_expected.not_to change(User, :count) }
+      it { expect(&signup_request).not_to change(User, :count) }
+      it { expect(signup_request.call).to render_template(:new) }
+    end
+
+    context "with valid information" do
+      let(:name) { "Kumiko Oumae" }
+      let(:email) { "anime-eupho@example.com" }
+      let(:password) { "password" }
+
+      it { expect(&signup_request).to change(User, :count).by(1) }
+      it { expect(signup_request.call).to redirect_to user_path(assigns(:user)) }
+
+      describe "flash[:success]" do
+        subject { flash[:success] }
+
+        before { signup_request.call }
+        it { is_expected.not_to be_empty }
+      end
     end
   end
 end
