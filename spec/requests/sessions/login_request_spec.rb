@@ -15,7 +15,21 @@ RSpec.describe "/login", type: :request do
   end
 
   describe "POST /login" do
-    it "is a pending example"
+    subject(:login_request) { -> { post login_path, params: { session: session } } }
+
+    let(:session) do
+      {
+        email: email,
+        password: password,
+      }
+    end
+
+    context "when unsuccessful login" do
+      let(:email) { "invalid_email" }
+      let(:password) { "invalid_password" }
+
+      it { expect(login_request.call).to render_template(:new) }
+    end
   end
 
   describe "DELETE /logout" do
