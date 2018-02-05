@@ -9,8 +9,7 @@ class SessionsController < ApplicationController
     if user&.authenticate(session_params[:password])
       # TODO: redirect_to user
     else
-      # FIXME: this message doesn't disappear even when jumping to another page
-      flash[:danger] = "Invalid email/password combination"
+      flash.now[:danger] = "Invalid email/password combination"
       render "new"
     end
   end
