@@ -36,10 +36,12 @@
     "format": "prettier --write 'src/**/*.{js,css}'",
     "lint": "eslint src",
     "release": "yarn clean && NODE_ENV=production yarn build",
-    "watch":
-      "webpack --config ./config/webpack.config.js --watch --colors --progress"
+    "watch": "webpack --config ./config/webpack.config.js --watch --colors --progress"
   },
   "dependencies": {
-    "bootstrap-sass": "^3.3.7"
+    "bootstrap": "^4.0.0",
+    "bootstrap-sass": "^3.3.7",
+    "jquery": "^3.3.1",
+    "popper.js": "^1.12.9"
   }
 }
