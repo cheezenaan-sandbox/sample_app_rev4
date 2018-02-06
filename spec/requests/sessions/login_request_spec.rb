@@ -24,11 +24,19 @@ RSpec.describe "/login", type: :request do
       }
     end
 
-    context "when unsuccessful login" do
+    context "with invalid information" do
       let(:email) { "invalid_email" }
       let(:password) { "invalid_password" }
 
       it { expect(login_request.call).to render_template(:new) }
+    end
+
+    context "with valid information" do
+      let(:email) { "anime-eupho@example.com" }
+      let(:password) { "euphonium" }
+
+      # TODO: Introduce factory_bot for fixtures
+      it "is a pending example"
     end
   end
 
