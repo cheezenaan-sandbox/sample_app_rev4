@@ -26,13 +26,21 @@ RSpec.describe "Login page", type: :system do
   end
 
   context "when filling valid information" do
+    let(:user) { FactoryBot.create(:user) }
+
     before do
-      fill_in "Email", with: "anime-eupho@example.com"
-      fill_in "Password", with: "euphonium"
+      fill_in "Email", with: user.email
+      fill_in "Password", with: user.password
       click_button "Login"
     end
 
-    # TODO: Introduce factory_bot for fixtures
-    it "is a pending example"
+    it { is_expected.to have_current_path %r{users\/(\d+)} }
+    it { is_expected.not_to have_link "Log in", href: login_path }
+    it { is_expected.to have_link "Users" }
+    it { is_expected.to have_content "Account" }
+    it "has Logout link inside Account pulldown menu" do
+      click_link "Account"
+      expect(page).to have_link "Log out", href: logout_path
+    end
   end
 end

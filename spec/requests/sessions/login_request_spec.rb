@@ -3,6 +3,8 @@
 require "rails_helper"
 
 RSpec.describe "/login", type: :request do
+  include SessionsHelper
+
   describe "GET /login" do
     subject { response }
 
@@ -26,17 +28,22 @@ RSpec.describe "/login", type: :request do
 
     context "with invalid information" do
       let(:email) { "invalid_email" }
-      let(:password) { "invalid_password" }
+      let(:password) { "invalid" }
 
       it { expect(login_request.call).to render_template(:new) }
     end
 
     context "with valid information" do
-      let(:email) { "anime-eupho@example.com" }
-      let(:password) { "euphonium" }
+      let(:user) { FactoryBot.create(:user) }
+      let(:email) { user.email }
+      let(:password) { user.password }
 
-      # TODO: Introduce factory_bot for fixtures
-      it "is a pending example"
+      before do
+        user.reload
+        login_request.call
+      end
+
+      it { is_expected.to redirect_to user_path(user) }
     end
   end
 
