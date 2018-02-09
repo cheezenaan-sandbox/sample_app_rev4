@@ -29,7 +29,7 @@ const pluginsForProudction = plugins.concat(UglifyJS);
 
 module.exports = {
   entry: {
-    vendor: ['jquery', 'popper.js', 'bootstrap'],
+    vendor: ['jquery', 'popper.js', 'bootstrap', 'rails-ujs'],
     'layouts/application': [
       './src/javascripts/application/index.js',
       './src/stylesheets/application.scss',

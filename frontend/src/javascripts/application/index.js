@@ -1,3 +1,4 @@
+import Rails from 'rails-ujs';
 import Hello from './Hello';
 
 const initializeHello = () => {
@@ -5,4 +6,9 @@ const initializeHello = () => {
   hello.soundEuphonium();
 };
 
-initializeHello();
+const setup = () => {
+  initializeHello();
+  Rails.start();
+};
+
+setup();
