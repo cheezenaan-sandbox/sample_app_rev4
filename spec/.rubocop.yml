@@ -1,0 +1,19 @@
+require: rubocop-rspec
+
+inherit_from:
+  - ../.rubocop.yml
+
+RSpec/ExampleLength:
+  Max: 8
+
+RSpec/ExpectChange:
+  EnforcedStyle: block
+
+RSpec/MultipleExpectations:
+  AggregateFailuresByDefault: true
+
+RSpec/NamedSubject:
+  Enabled: false
+
+RSpec/NestedGroups:
+  Max: 4

@@ -30,7 +30,7 @@ RSpec.describe "/users", type: :request do
       let(:email) { "some@foo" }
       let(:password) { "eupho" }
 
-      it { expect(&signup_request).not_to change(User, :count) }
+      it { expect(&signup_request).not_to change { User.count } }
       it { expect(signup_request.call).to render_template(:new) }
     end
 
@@ -39,7 +39,7 @@ RSpec.describe "/users", type: :request do
       let(:email) { "anime-eupho@example.com" }
       let(:password) { "password" }
 
-      it { expect(&signup_request).to change(User, :count).by(1) }
+      it { expect(&signup_request).to change { User.count }.by(1) }
       it { expect(signup_request.call).to redirect_to user_path(assigns(:user)) }
 
       describe "flash[:success]" do
