@@ -34,11 +34,12 @@ RSpec.describe "Login page", type: :system do
       click_button "Login"
     end
 
-    it { is_expected.to have_current_path %r{users\/(\d+)} }
-    it { is_expected.not_to have_link "Log in", href: login_path }
-    it { is_expected.to have_link "Users" }
-    it { is_expected.to have_content "Account" }
-    it "has Logout link inside Account pulldown menu" do
+    it "succeeds login and redirect to user page" do
+      expect(page).to have_current_path %r{users\/(\d+)}
+      expect(page).not_to have_link "Log in", href: login_path
+      expect(page).to have_link "Users"
+      expect(page).to have_content "Account"
+
       click_link "Account"
       expect(page).to have_link "Log out", href: logout_path
     end
