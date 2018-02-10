@@ -43,5 +43,15 @@ RSpec.describe "Login", type: :system do
       click_link "Account"
       expect(page).to have_link "Log out", href: logout_path
     end
+
+    it "logout and redirect_to Home page" do
+      click_link "Account"
+      click_link "Log out"
+
+      expect(page).to have_current_path root_path
+      expect(page).to have_link "Log in", href: login_path
+      expect(page).not_to have_link "Users"
+      expect(page).not_to have_content "Account"
+    end
   end
 end

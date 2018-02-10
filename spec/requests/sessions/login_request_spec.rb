@@ -46,8 +46,4 @@ RSpec.describe "/login", type: :request do
       it { is_expected.to redirect_to user_path(user) }
     end
   end
-
-  describe "DELETE /logout" do
-    it "is a pending example"
-  end
 end
