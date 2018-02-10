@@ -11,10 +11,13 @@ RSpec.describe "StaticPages", type: :system do
     before { visit root_path }
 
     it { is_expected.to have_title full_title }
-    it { is_expected.to have_link "Home", href: root_path }
-    it { is_expected.to have_link "Help", href: help_path }
-    it { is_expected.to have_link "About", href: about_path }
-    it { is_expected.to have_link "Contact", href: contact_path }
+
+    it "has layout links" do
+      expect(page).to have_link "Home", href: root_path
+      expect(page).to have_link "Help", href: help_path
+      expect(page).to have_link "About", href: about_path
+      expect(page).to have_link "Contact", href: contact_path
+    end
   end
 
   describe "Help page" do
