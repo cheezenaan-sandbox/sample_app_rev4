@@ -59,7 +59,8 @@ RSpec.describe User, type: :model do
     end
 
     context "when email format is invalid" do
-      %w[user@example,com user_at_foo.org user.name@example. foo@bar_baz.com foo@bar+baz.com foo@bar..baz.com].each do |invalid_address|
+      %w[user@example,com user_at_foo.org user.name@example.
+         foo@bar_baz.com foo@bar+baz.com foo@bar..baz.com].each do |invalid_address|
         let(:email) { invalid_address }
         it { is_expected.to be_invalid }
       end

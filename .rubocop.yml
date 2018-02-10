@@ -7,6 +7,17 @@ AllCops:
     - "vendor/**/*"
     - "frontend/**/*"
 
+Layout/IndentArray:
+  EnforcedStyle: consistent
+
+Layout/IndentHash:
+  EnforcedStyle: consistent
+
+# e.g. it { expect{ subject }.to change { foo }
+Lint/AmbiguousBlockAssociation:
+  Exclude:
+    - "spec/**/*_spec.rb"
+
 # Allow variable name starting with "_"
 Lint/UnderscorePrefixedVariableName:
   Enabled: false
