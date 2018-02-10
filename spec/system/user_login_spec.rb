@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe "Login page", type: :system do
+RSpec.describe "Login", type: :system do
   subject { page }
 
   let(:error_message) { "Invalid email/password combination" }

@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe "Signup page", type: :system do
+RSpec.describe "Signup", type: :system do
   subject { page }
 
   before { visit signup_path }
