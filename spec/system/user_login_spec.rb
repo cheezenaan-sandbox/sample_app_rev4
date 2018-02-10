@@ -10,18 +10,15 @@ RSpec.describe "Login", type: :system do
   before { visit login_path }
 
   context "when filling invalid information" do
-    before do
+    it "shows error message" do
       fill_in "Email", with: "anime-eupho@invalid"
       fill_in "Password", with: "invalid"
       click_button "Login"
-    end
 
-    it { is_expected.to have_content error_message }
+      expect(page).to have_content error_message
 
-    context "when jumping to another page" do
-      before { visit root_path }
-
-      it { is_expected.not_to have_content error_message }
+      visit root_path
+      expect(page).not_to have_content error_message
     end
   end
 
