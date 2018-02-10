@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe "Signup page", type: :system do
+RSpec.describe "Signup", type: :system do
   subject { page }
 
   before { visit signup_path }
@@ -18,8 +18,10 @@ RSpec.describe "Signup page", type: :system do
       click_button "Create my account"
     end
 
-    it { is_expected.to have_selector ".alert-danger" }
-    it { is_expected.to have_selector ".field_with_errors" }
+    it "fails signup" do
+      expect(page).to have_selector ".alert-danger"
+      expect(page).to have_selector ".field_with_errors"
+    end
   end
 
   context "when filling valid information" do
@@ -31,8 +33,14 @@ RSpec.describe "Signup page", type: :system do
       click_button "Create my account"
     end
 
-    it { is_expected.to have_current_path %r{users\/(\d+)} }
-    it { is_expected.not_to have_selector ".alert-danger" }
-    it { is_expected.not_to have_selector ".field_with_errors" }
+    it "succeeds signup and redirect to user page" do
+      expect(page).to have_current_path %r{users\/(\d+)}
+      expect(page).not_to have_selector ".alert-danger"
+      expect(page).not_to have_selector ".field_with_errors"
+      expect(page).not_to have_link "Log in", href: login_path
+
+      click_link "Account"
+      expect(page).to have_link "Log out", href: logout_path
+    end
   end
 end

@@ -1,3 +1,4 @@
+const webpack = require('webpack');
 const path = require('path');
 const ManifestPlugin = require('webpack-manifest-plugin');
 const UglifyJSPlugin = require('uglify-js-plugin');
@@ -13,12 +14,22 @@ const UglifyJS = new UglifyJSPlugin({
   warnings: false,
 });
 const ExtractCSS = new ExtractTextPlugin(`${fileName}.css`);
+const Provide = new webpack.ProvidePlugin({
+  $: 'jquery',
+  jQuery: 'jquery',
+  Popper: ['popper.js', 'default'],
+});
+const CommonChunk = new webpack.optimize.CommonsChunkPlugin({
+  name: 'vendor',
+  minChunks: ({ context }) => /node_modules/.test(context),
+});
 
-const plugins = [Manifest, ExtractCSS];
+const plugins = [Manifest, ExtractCSS, CommonChunk, Provide];
 const pluginsForProudction = plugins.concat(UglifyJS);
 
 module.exports = {
   entry: {
+    vendor: ['jquery', 'popper.js', 'bootstrap', 'rails-ujs'],
     'layouts/application': [
       './src/javascripts/application/index.js',
       './src/stylesheets/application.scss',

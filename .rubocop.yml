@@ -1,5 +1,3 @@
-require: rubocop-rspec
-
 AllCops:
   DisplayStyleGuide: true
   TargetRubyVersion: 2.4
@@ -76,9 +74,3 @@ Style/TrailingCommaInArguments:
 
 Style/TrailingCommaInLiteral:
   EnforcedStyleForMultiline: comma
-
-RSpec/NamedSubject:
-  Enabled: false
-
-RSpec/NestedGroups:
-  Max: 4

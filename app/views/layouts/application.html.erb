@@ -7,7 +7,7 @@
   </title>
   <%= csrf_meta_tags %>
   <%= stylesheet_link_tag frontend_asset_path("layouts/application.css"), media: 'all' %>
-  <%= javascript_include_tag frontend_asset_path("layouts/application.js") %>
+  <%= javascript_include_tag frontend_asset_path("vendor.js"), frontend_asset_path("layouts/application.js") %>
 </head>
 
 <body>

@@ -24,13 +24,12 @@ module App
       g.assets false
       g.helper false
       g.test_framekwork :rspec,
-                        fixture: true,
+                        fixtures: true,
                         view_specs: false,
                         helper_specs: false,
                         routing_specs: false,
                         controller_specs: false,
                         request_specs: true
-      g.fixture_replacement :factory_bot, dir: "spec/factories"
     end
 
     config.active_record.default_timezone = :local
