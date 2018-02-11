@@ -1,14 +1,9 @@
 # frozen_string_literal: true
 
 class User < ApplicationRecord
-  attr_accessor :remember_token
-
-  before_save { self.email = email.downcase }
-
-  # Use ActiveModel::SecurePassword
-  has_secure_password
-
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
+
+  attr_accessor :remember_token
 
   validates :name, presence: true, length: { maximum: 50 }
   validates :email, presence: true, length: { maximum: 255 },
@@ -16,6 +11,11 @@ class User < ApplicationRecord
                     uniqueness: { case_sensitive: false }
 
   validates :password, presence: true, length: { minimum: 6 }
+
+  before_save { self.email = email.downcase }
+
+  # Use ActiveModel::SecurePassword
+  has_secure_password
 
   def remember
     self.remember_token = SecureToken.create
