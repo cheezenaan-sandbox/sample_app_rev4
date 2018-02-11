@@ -71,6 +71,9 @@ Style/AsciiComments:
 Style/Documentation:
   Enabled: false
 
+Style/GuardClause:
+  MinBodyLength: 5
+
 Style/MixinUsage:
   Exclude:
     - "bin/setup"
