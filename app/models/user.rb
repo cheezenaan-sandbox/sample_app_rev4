@@ -25,4 +25,8 @@ class User < ApplicationRecord
   def authenticated?(remember_token)
     SecureDigest.new(remember_digest).is_digest?(remember_token)
   end
+
+  def forget
+    update_attribute(:remember_digest, nil)
+  end
 end
