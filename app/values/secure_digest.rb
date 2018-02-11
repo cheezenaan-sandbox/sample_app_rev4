@@ -3,7 +3,7 @@
 class SecureDigest
   attr_reader :string
 
-  def initialize(string:)
+  def initialize(string)
     @string = string
   end
 
@@ -19,4 +19,10 @@ class SecureDigest
   end
 
   protected :string
+
+  class << self
+    def digest(string)
+      new(string).digest
+    end
+  end
 end

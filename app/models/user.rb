@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class User < ApplicationRecord
+  attr_accessor :remember_token
+
   before_save { self.email = email.downcase }
 
   # Use ActiveModel::SecurePassword
@@ -14,4 +16,9 @@ class User < ApplicationRecord
                     uniqueness: { case_sensitive: false }
 
   validates :password, presence: true, length: { minimum: 6 }
+
+  def remember
+    self.remember_token = SecureToken.create
+    update_attribute(:remember_digest, SecureDigest.digest(remember_token))
+  end
 end
