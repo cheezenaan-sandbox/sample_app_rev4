@@ -23,6 +23,7 @@ class User < ApplicationRecord
   end
 
   def authenticated?(remember_token)
+    return false if remember_digest.blank?
     SecureDigest.new(remember_digest).is_digest?(remember_token)
   end
 

@@ -3,12 +3,8 @@
 require "rails_helper"
 
 RSpec.describe User, type: :model do
-  # TODO: Introduce factory_bot
-  subject { user }
-
-  let(:user) do
-    User.new(name: name, email: email,
-             password: password, password_confirmation: password)
+  subject(:user) do
+    FactoryBot.build(:user, name: name, email: email, password: password)
   end
 
   describe "#name" do
@@ -111,6 +107,19 @@ RSpec.describe User, type: :model do
       let(:password) { "a" * 5 }
 
       it { is_expected.to be_invalid }
+    end
+  end
+
+  describe "#authenticated?" do
+    subject { user.authenticated?(remember_token) }
+
+    let(:user) { FactoryBot.build(:user, remember_digest: digest) }
+
+    context "when digest is blank" do
+      let(:digest) { "" }
+      let(:remember_token) { "" }
+
+      it { is_expected.to be false }
     end
   end
 end
