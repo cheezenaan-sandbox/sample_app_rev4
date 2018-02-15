@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe "/users", type: :request do
+RSpec.describe "/users/:id/edit", type: :request do
   describe "GET /users/:id/edit" do
     subject { response }
 
@@ -16,14 +16,18 @@ RSpec.describe "/users", type: :request do
   end
 
   describe "PATCH /users/:id" do
-    subject(:update_request) { -> { patch user_path(user), params: { user: user } } }
+    subject(:update_request) { -> { patch user_path(user), params: params } }
 
-    let(:user) do
+    let(:user) { FactoryBot.create(:user) }
+    let(:params) do
       {
-        name: name,
-        email: email,
-        password: password,
-        password_confirmation: password,
+        id: user.id,
+        user: {
+          name: name,
+          email: email,
+          password: password,
+          password_confirmation: password,
+        },
       }
     end
 
@@ -32,7 +36,11 @@ RSpec.describe "/users", type: :request do
       let(:email) { "some@foo" }
       let(:password) { "eupho" }
 
-      it "TODO: implement later"
+      it "fails update" do
+        update_request.call
+        expect(response.body).to include(I18n.t("errors.messages.invalid"))
+        expect(response).to render_template(:edit)
+      end
     end
 
     context "with valid information" do
