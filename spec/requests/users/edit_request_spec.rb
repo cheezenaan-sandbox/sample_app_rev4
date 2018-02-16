@@ -36,7 +36,7 @@ RSpec.describe "/users/:id/edit", type: :request do
       let(:email) { "some@foo" }
       let(:password) { "eupho" }
 
-      it "fails update" do
+      it "update information fails" do
         update_request.call
         expect(response.body).to include(I18n.t("errors.messages.invalid"))
         expect(response).to render_template(:edit)
@@ -44,11 +44,15 @@ RSpec.describe "/users/:id/edit", type: :request do
     end
 
     context "with valid information" do
-      let(:name) { "Kumiko Oumae" }
-      let(:email) { "anime-eupho@example.com" }
-      let(:password) { "password" }
+      let(:name) { "Kousaka Reina" }
+      let(:email) { "anime-eupho+test@example.com" }
+      let(:password) { "" }
 
-      it "TODO: implement later"
+      it "update information succeeds" do
+        update_request.call
+        expect(response.body).not_to include(I18n.t("error.messages.invalid"))
+        expect(response).to redirect_to user_path(user)
+      end
     end
   end
 end
