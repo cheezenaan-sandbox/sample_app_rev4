@@ -18,8 +18,6 @@ RSpec.describe "Signup", type: :system do
     click_button "Create my account"
   end
 
-  it { is_expected.to have_selector "form[action='/signup']" }
-
   context "when filling invalid information" do
     let(:name) { "" }
     let(:email) { "invalid@email" }
