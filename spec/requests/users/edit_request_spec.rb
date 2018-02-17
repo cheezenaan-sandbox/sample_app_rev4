@@ -14,7 +14,25 @@ RSpec.describe "/users/:id/edit", type: :request do
       it { is_expected.to redirect_to login_path }
     end
 
-    context "when logged in as a existing user" do
+    context "when logged in as a wrong user" do
+      let(:other_user) do
+        FactoryBot.create(
+          :user,
+          name: "Asuka Tanaka",
+          email: "anime-eupho2@example.gov",
+          password: "password",
+        )
+      end
+
+      before do
+        log_in_as(other_user)
+        get edit_user_path(user)
+      end
+
+      it { is_expected.to redirect_to root_path }
+    end
+
+    context "when logged in as a correct user" do
       before do
         log_in_as(user)
         get edit_user_path(user)
@@ -48,7 +66,26 @@ RSpec.describe "/users/:id/edit", type: :request do
       it { expect(update_request.call).to redirect_to login_path }
     end
 
-    context "when logged in as a existing user" do
+    context "when logged in as a wrong user" do
+      let(:other_user) do
+        FactoryBot.create(
+          :user,
+          name: "Asuka Tanaka",
+          email: "anime-eupho2@example.gov",
+          password: "password",
+        )
+      end
+
+      let(:name) { "Kousaka Reina" }
+      let(:email) { "anime-eupho+test@example.com" }
+      let(:password) { "" }
+
+      before { log_in_as(other_user) }
+
+      it { expect(update_request.call).to redirect_to root_path }
+    end
+
+    context "when logged in as a correct user" do
       before { log_in_as(user) }
 
       context "with invalid information" do

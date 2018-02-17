@@ -25,10 +25,12 @@ class UsersController < ApplicationController
 
   def edit
     @user = User.find(params[:id])
+    return redirect_to root_url unless current_user?(@user)
   end
 
   def update
     @user = User.find(params[:id])
+    return redirect_to root_url unless current_user?(@user)
 
     if @user.update_attributes(user_params)
       flash[:success] = "Profile updated!!!!!!"
