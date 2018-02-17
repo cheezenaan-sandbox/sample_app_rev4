@@ -8,11 +8,20 @@ RSpec.describe "/users/:id/edit", type: :request do
 
     let(:user) { FactoryBot.create(:user) }
 
-    before do
-      get edit_user_path(user)
+    context "when not logged in" do
+      before { get edit_user_path(user) }
+
+      it { is_expected.to redirect_to login_path }
     end
 
-    it { is_expected.to have_http_status(200) }
+    context "when logged in as a existing user" do
+      before do
+        log_in_as(user)
+        get edit_user_path(user)
+      end
+
+      it { is_expected.to have_http_status(200) }
+    end
   end
 
   describe "PATCH /users/:id" do
@@ -31,27 +40,41 @@ RSpec.describe "/users/:id/edit", type: :request do
       }
     end
 
-    context "with invalid information" do
-      let(:name) { "" }
-      let(:email) { "some@foo" }
-      let(:password) { "eupho" }
-
-      it "update information fails" do
-        update_request.call
-        expect(response.body).to include(I18n.t("errors.messages.invalid"))
-        expect(response).to render_template(:edit)
-      end
-    end
-
-    context "with valid information" do
+    context "when not logged in" do
       let(:name) { "Kousaka Reina" }
       let(:email) { "anime-eupho+test@example.com" }
       let(:password) { "" }
 
-      it "update information succeeds" do
-        update_request.call
-        expect(response.body).not_to include(I18n.t("error.messages.invalid"))
-        expect(response).to redirect_to user_path(user)
+      it { expect(update_request.call).to redirect_to login_path }
+    end
+
+    context "when logged in as a existing user" do
+      before { log_in_as(user) }
+
+      context "with invalid information" do
+        let(:name) { "" }
+        let(:email) { "some@foo" }
+        let(:password) { "eupho" }
+
+        it "fail to update information" do
+          update_request.call
+
+          expect(response.body).to include(I18n.t("errors.messages.invalid"))
+          expect(response).to render_template(:edit)
+        end
+      end
+
+      context "with valid information" do
+        let(:name) { "Kousaka Reina" }
+        let(:email) { "anime-eupho+test@example.com" }
+        let(:password) { "" }
+
+        it "succeed to update information" do
+          update_request.call
+
+          expect(response.body).not_to include(I18n.t("error.messages.invalid"))
+          expect(response).to redirect_to user_path(user)
+        end
       end
     end
   end
