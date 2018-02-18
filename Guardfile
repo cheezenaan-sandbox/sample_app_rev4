@@ -47,12 +47,7 @@ guard :rspec, cmd: "bin/rspec" do
   dsl.watch_spec_files_for(rails.app_files)
   dsl.watch_spec_files_for(rails.views)
 
-  watch(rails.controllers) do |m|
-    [
-      rspec.spec.call("controllers/#{m[1]}_controller"),
-      rspec.spec.call("requests/#{m[1]}_request"),
-    ]
-  end
+  watch(rails.controllers) { |m| "#{rspec.spec_dir}/requests/#{m[1]}" }
 
   # Rails config changes
   watch(rails.spec_helper)     { rspec.spec_dir }
@@ -60,6 +55,6 @@ guard :rspec, cmd: "bin/rspec" do
   watch(rails.app_controller)  { "#{rspec.spec_dir}/controllers" }
 
   # Capybara system specs
-  watch(rails.view_dirs)     { |m| rspec.spec.call("system/#{m[1]}") }
-  watch(rails.layouts)       { |m| rspec.spec.call("system/#{m[1]}") }
+  watch(rails.view_dirs)     { |m| "#{rspec.spec_dir}/system/#{m[1]}" }
+  watch(rails.layouts)       { |m| "#{rspec.spec_dir}/system/#{m[1]}" }
 end
