@@ -40,4 +40,12 @@ module SessionsHelper
     cookies.delete(:user_id)
     cookies.delete(:remember_token)
   end
+
+  def stored_location
+    session.delete(:return_to)
+  end
+
+  def store_location
+    session[:return_to] = request.original_url if request.get?
+  end
 end

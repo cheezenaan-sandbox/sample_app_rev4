@@ -34,11 +34,11 @@ RSpec.describe "/users/:id/edit", type: :request do
 
     context "when logged in as a correct user" do
       before do
-        log_in_as(user)
         get edit_user_path(user)
+        log_in_as(user)
       end
 
-      it { is_expected.to have_http_status(200) }
+      it { is_expected.to redirect_to edit_user_path(user) }
     end
   end
 
