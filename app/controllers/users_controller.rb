@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   before_action :authenticate_user!, only: %i[index edit update]
 
   def index
-    @users = User.all
+    @users = User.paginate(page: params[:page])
   end
 
   def show
