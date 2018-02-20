@@ -11,5 +11,9 @@ FactoryBot.define do
       sequence(:email) { |n| "user-#{n}@example.com" }
       password "foobar"
     end
+
+    trait :admin do
+      admin true
+    end
   end
 end
