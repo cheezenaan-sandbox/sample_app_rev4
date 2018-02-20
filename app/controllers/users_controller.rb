@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class UsersController < ApplicationController
-  before_action :authenticate_user!, only: %i[index edit update]
+  before_action :authenticate_user!, only: %i[index edit update destroy]
 
   def index
     @users = User.paginate(page: params[:page])
@@ -42,6 +42,14 @@ class UsersController < ApplicationController
     else
       render "edit"
     end
+  end
+
+  def destroy
+    return redirect_to root_url unless current_user.admin?
+
+    User.find(params[:id]).destroy
+    flash[:success] = "User has been deleted"
+    redirect_to users_url
   end
 
   private
