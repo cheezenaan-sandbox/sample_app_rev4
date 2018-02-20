@@ -112,6 +112,21 @@ RSpec.describe "/users/:id/edit", type: :request do
           expect(response.body).not_to include(I18n.t("error.messages.invalid"))
           expect(response).to redirect_to user_path(user)
         end
+
+        context "when admin attribute is passed" do
+          let(:params) do
+            {
+              id: user.id,
+              user: {
+                admin: 1,
+              },
+            }
+          end
+
+          it "admin attribute should NOT be updated" do
+            expect { update_request.call }.not_to change { user.reload.admin }
+          end
+        end
       end
     end
   end
