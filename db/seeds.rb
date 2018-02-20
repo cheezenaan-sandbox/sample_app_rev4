@@ -4,6 +4,7 @@ User.create!(
   name: "Kumiko Oumae",
   email: "anime-eupho@example.com",
   password: "foobar",
+  admin: true,
 )
 
 99.times do |n|
