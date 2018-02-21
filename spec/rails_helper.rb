@@ -66,4 +66,5 @@ RSpec.configure do |config|
   # config.filter_gems_from_backtrace("gem name")
   config.include ApplicationHelper, type: :system
   config.include Sessions::Test::RequestHelper, type: :request
+  config.include Sessions::Test::LoginMacros, type: :system
 end

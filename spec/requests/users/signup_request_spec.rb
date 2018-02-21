@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe "/users", type: :request do
+RSpec.describe "/signup", type: :request do
   describe "GET /signup" do
     subject { response }
 
@@ -14,7 +14,7 @@ RSpec.describe "/users", type: :request do
   end
 
   describe "POST /signup" do
-    subject(:signup_request) { -> { post signup_path, params: { user: user } } }
+    subject { response }
 
     let(:user) do
       {
@@ -25,13 +25,19 @@ RSpec.describe "/users", type: :request do
       }
     end
 
+    before do
+      post signup_path, params: { user: user }
+    end
+
     context "with invalid information" do
       let(:name) { "" }
       let(:email) { "some@foo" }
       let(:password) { "eupho" }
 
-      it { expect(&signup_request).not_to change { User.count } }
-      it { expect(signup_request.call).to render_template(:new) }
+      it "fail to signup" do
+        expect(response.body).to include(I18n.t("errors.messages.invalid"))
+        expect(response).to render_template(:new)
+      end
     end
 
     context "with valid information" do
@@ -39,14 +45,9 @@ RSpec.describe "/users", type: :request do
       let(:email) { "anime-eupho@example.com" }
       let(:password) { "password" }
 
-      it { expect(&signup_request).to change { User.count }.by(1) }
-      it { expect(signup_request.call).to redirect_to user_path(assigns(:user)) }
-
-      describe "flash[:success]" do
-        subject { flash[:success] }
-
-        before { signup_request.call }
-        it { is_expected.not_to be_empty }
+      it "succeed to signup" do
+        expect(response.body).not_to include(I18n.t("error.messages.invalid"))
+        expect(response).to redirect_to user_path(assigns(:user))
       end
     end
   end

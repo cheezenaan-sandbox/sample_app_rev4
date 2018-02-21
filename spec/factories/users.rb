@@ -5,5 +5,15 @@ FactoryBot.define do
     name "Kumiko Oumae"
     email "anime@example.com"
     password "euphonium"
+
+    trait :dummy do
+      sequence(:name) { |n| "User #{n}" }
+      sequence(:email) { |n| "user-#{n}@example.com" }
+      password "foobar"
+    end
+
+    trait :admin do
+      admin true
+    end
   end
 end

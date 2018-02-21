@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module SessionsHelper
+module SessionHelper
   def log_in(user)
     session[:user_id] = user.id
   end
@@ -22,6 +22,10 @@ module SessionsHelper
     end
   end
 
+  def current_user?(user)
+    user == current_user
+  end
+
   def logged_in?
     current_user.present?
   end
@@ -35,5 +39,13 @@ module SessionsHelper
     user.forget
     cookies.delete(:user_id)
     cookies.delete(:remember_token)
+  end
+
+  def stored_location
+    session.delete(:return_to)
+  end
+
+  def store_location
+    session[:return_to] = request.original_url if request.get?
   end
 end

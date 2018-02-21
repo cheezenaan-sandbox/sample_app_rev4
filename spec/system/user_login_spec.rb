@@ -32,7 +32,7 @@ RSpec.describe "Login", type: :system do
     end
 
     it "succeeds login and redirect to user page" do
-      expect(page).to have_current_path %r{users\/(\d+)}
+      expect(page).to have_current_path user_path(user)
       expect(page).not_to have_link "Log in", href: login_path
       expect(page).to have_link "Users"
       expect(page).to have_content "Account"
