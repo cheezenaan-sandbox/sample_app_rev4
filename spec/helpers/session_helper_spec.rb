@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe SessionsHelper do
+RSpec.describe SessionHelper do
   describe "current_user" do
     subject { current_user }
 
