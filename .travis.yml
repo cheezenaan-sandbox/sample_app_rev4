@@ -18,7 +18,7 @@ before_script:
   - docker-compose -f .travis/docker-compose.yml run --rm spring bin/rails db:create db:migrate
 
 script:
-  - docker-compose -f .travis/docker-compose.yml run --rm spring rspec --format progress
+  - docker-compose -f .travis/docker-compose.yml run --rm spring rspec --profile --format progress
 
 branches:
   only:
