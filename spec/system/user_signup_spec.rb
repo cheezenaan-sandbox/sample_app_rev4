@@ -23,7 +23,7 @@ RSpec.describe "Signup", type: :system do
     let(:email) { "invalid@email" }
     let(:password) { "invalid" }
 
-    it "fails signup" do
+    it "fail to signup" do
       expect(page).to have_selector ".alert-danger"
       expect(page).to have_selector ".field_with_errors"
     end
@@ -35,7 +35,7 @@ RSpec.describe "Signup", type: :system do
     let(:email) { user.email }
     let(:password) { user.password }
 
-    it "succeeds signup and show user profile page" do
+    it "succeed to signup and show user profile page" do
       expect(page).to have_content user.name
       expect(page).not_to have_selector ".alert-danger"
       expect(page).not_to have_selector ".field_with_errors"
