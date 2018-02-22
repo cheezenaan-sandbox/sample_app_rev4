@@ -5,6 +5,8 @@ class User < ApplicationRecord
 
   attr_accessor :remember_token
 
+  has_one :account_activation, class_name: "User::AccountActivation", dependent: :destroy
+
   validates :name, presence: true, length: { maximum: 50 }
   validates :email, presence: true, length: { maximum: 255 },
                     format: { with: VALID_EMAIL_REGEX },
@@ -29,5 +31,9 @@ class User < ApplicationRecord
 
   def forget
     update_attribute(:remember_digest, nil)
+  end
+
+  def activated?
+    account_activation.activated?
   end
 end
