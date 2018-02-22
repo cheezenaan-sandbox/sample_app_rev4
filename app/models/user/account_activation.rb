@@ -6,4 +6,8 @@ class User::AccountActivation < ApplicationRecord
   def activated?
     activated_at.present?
   end
+
+  def inactivated?
+    !activated?
+  end
 end

@@ -14,10 +14,10 @@ class User < ApplicationRecord
 
   validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
 
-  before_save { self.email = email.downcase }
-
   # Use ActiveModel::SecurePassword
   has_secure_password
+
+  delegate :activated?, :inactivated?, to: :account_activation
 
   def remember
     self.remember_token = SecureToken.create
@@ -31,9 +31,5 @@ class User < ApplicationRecord
 
   def forget
     update_attribute(:remember_digest, nil)
-  end
-
-  def activated?
-    account_activation.activated?
   end
 end
