@@ -47,7 +47,7 @@ RSpec.describe "/signup", type: :request do
 
       it "succeed to signup" do
         expect(response.body).not_to include(I18n.t("error.messages.invalid"))
-        expect(response).to redirect_to user_path(assigns(:user))
+        expect(response).to have_http_status(302)
       end
     end
   end

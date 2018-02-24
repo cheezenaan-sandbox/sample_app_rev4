@@ -22,6 +22,9 @@ class User::CreatorService
       @user.create_account_activation!(
         digest: SecureDigest.digest(activation_token),
       )
+
+      UserMailer.account_activation(user: @user, token: activation_token)
+                .deliver_now!
     end
   end
 

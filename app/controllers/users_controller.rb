@@ -19,9 +19,8 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
 
     if User::CreatorService.call(user: @user)
-      log_in(@user)
-      redirect_to @user
-      flash[:success] = "Welcome to the Sample App!!!!"
+      redirect_to root_url
+      flash[:info] = "Please check your email to activate your account."
     else
       render "new"
     end
