@@ -17,7 +17,7 @@ RSpec.describe "/login", type: :request do
   describe "POST /login" do
     subject { response }
 
-    let(:user) { FactoryBot.create(:user) }
+    let(:user) { FactoryBot.create(:user, :activated) }
 
     context "with invalid information" do
       let(:invalid_user) { FactoryBot.build(:user, email: email, password: password) }

@@ -19,7 +19,7 @@ RSpec.describe "User index", type: :system do
     end
 
     context "as an admin" do
-      let(:admin) { FactoryBot.create(:user, :admin) }
+      let(:admin) { FactoryBot.create(:user, :admin, :activated) }
 
       before { log_in_as(admin) }
 
@@ -40,6 +40,7 @@ RSpec.describe "User index", type: :system do
       let(:non_admin) do
         FactoryBot.create(
           :user,
+          :activated,
           name: "Asuka Tanaka",
           email: "anime2@example.com",
         )

@@ -6,7 +6,7 @@ RSpec.describe "/users/:id/edit", type: :request do
   describe "GET /users/:id/edit" do
     subject { response }
 
-    let(:user) { FactoryBot.create(:user) }
+    let(:user) { FactoryBot.create(:user, :activated) }
 
     context "when not logged in" do
       before { get edit_user_path(user) }
@@ -18,7 +18,7 @@ RSpec.describe "/users/:id/edit", type: :request do
       let(:other_user) do
         FactoryBot.create(
           :user,
-          name: "Asuka Tanaka",
+          name: "Asuk Tanaka",
           email: "anime-eupho2@example.gov",
           password: "password",
         )
@@ -45,7 +45,7 @@ RSpec.describe "/users/:id/edit", type: :request do
   describe "PATCH /users/:id" do
     subject(:update_request) { -> { patch user_path(user), params: params } }
 
-    let(:user) { FactoryBot.create(:user) }
+    let(:user) { FactoryBot.create(:user, :activated) }
     let(:params) do
       {
         id: user.id,
@@ -70,6 +70,7 @@ RSpec.describe "/users/:id/edit", type: :request do
       let(:other_user) do
         FactoryBot.create(
           :user,
+          :activated,
           name: "Asuka Tanaka",
           email: "anime-eupho2@example.gov",
           password: "password",

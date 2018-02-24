@@ -15,5 +15,11 @@ FactoryBot.define do
     trait :admin do
       admin true
     end
+
+    trait :activated do
+      after(:create) do |user|
+        FactoryBot.create(:account_activation, user: user)
+      end
+    end
   end
 end
