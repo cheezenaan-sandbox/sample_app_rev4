@@ -18,7 +18,8 @@ RSpec.describe "/users/:id/edit", type: :request do
       let(:other_user) do
         FactoryBot.create(
           :user,
-          name: "Asuk Tanaka",
+          :activated,
+          name: "Asuka Tanaka",
           email: "anime-eupho2@example.gov",
           password: "password",
         )
@@ -113,20 +114,20 @@ RSpec.describe "/users/:id/edit", type: :request do
           expect(response.body).not_to include(I18n.t("error.messages.invalid"))
           expect(response).to redirect_to user_path(user)
         end
+      end
 
-        context "when admin attribute is passed" do
-          let(:params) do
-            {
-              id: user.id,
-              user: {
-                admin: 1,
-              },
-            }
-          end
+      context "when admin attribute is passed" do
+        let(:params) do
+          {
+            id: user.id,
+            user: {
+              admin: 1,
+            },
+          }
+        end
 
-          it "admin attribute should NOT be updated" do
-            expect { update_request.call }.not_to change { user.reload.admin }
-          end
+        it "admin attribute should NOT be updated" do
+          expect { update_request.call }.not_to change { user.reload.admin }
         end
       end
     end
