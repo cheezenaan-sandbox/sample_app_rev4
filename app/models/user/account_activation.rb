@@ -10,4 +10,8 @@ class User::AccountActivation < ApplicationRecord
   def inactivated?
     !activated?
   end
+
+  def authenticated?(token)
+    SecureDigest.new(digest).is_digest?(token)
+  end
 end
