@@ -20,6 +20,8 @@ gem "will_paginate"
 group :development, :test do
   gem "byebug", platforms: %i[mri mingw x64_mingw]
   gem "hirb"
+  gem "letter_opener"
+  gem "letter_opener_web"
   gem "pry-byebug"
   gem "pry-coolline"
   gem "pry-doc"
