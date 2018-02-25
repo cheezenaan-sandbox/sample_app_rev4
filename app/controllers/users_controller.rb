@@ -4,11 +4,12 @@ class UsersController < ApplicationController
   before_action :authenticate_user!, only: %i[index edit update destroy]
 
   def index
-    @users = User.paginate(page: params[:page])
+    @users = User.activated.paginate(page: params[:page])
   end
 
   def show
     @user = User.find(params[:id])
+    return redirect_to root_url if @user.inactivated?
   end
 
   def new

@@ -19,6 +19,9 @@ class User < ApplicationRecord
 
   delegate :activated?, :inactivated?, to: :account_activation
 
+  scope :activated, -> { joins(:account_activation).merge(User::AccountActivation.activated) }
+  scope :inactivated, -> { joins(:account_activation).merge(User::AccountActivation.inactivated) }
+
   def remember
     self.remember_token = SecureToken.create
     update_attribute(:remember_digest, SecureDigest.digest(remember_token))
