@@ -32,4 +32,13 @@ class User < ApplicationRecord
   def forget
     update_attribute(:remember_digest, nil)
   end
+
+  def inactivated?
+    !activated?
+  end
+
+  # TODO: Summarize other `#authenticated?` methods
+  def activation_authenticated?(activation_token)
+    SecureDigest.new(activation_digest).is_digest?(activation_token)
+  end
 end

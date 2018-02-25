@@ -13,10 +13,9 @@ class User::AccountActivatorService
   end
 
   def call
-    activation = @user.account_activation
-    return unless activation.inactivated? && activation.authenticated?(@token)
+    return unless @user.inactivated? && @user.activation_authenticated?(@token)
 
-    activation.update_attributes!(activated_at: Time.zone.now)
+    @user.update_attributes!(activated: true, activated_at: Time.zone.now)
   end
 
   private_class_method :new

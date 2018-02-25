@@ -16,15 +16,11 @@ class User::CreatorService
 
     ActiveRecord::Base.transaction do
       @user.email = @user.email.downcase
+      @user.activation_token = SecureToken.create
+      @user.activation_digest = SecureDigest.digest(@user.activation_token)
       @user.save!
 
-      activation_token = SecureToken.create
-      @user.create_account_activation!(
-        digest: SecureDigest.digest(activation_token),
-      )
-
-      UserMailer.account_activation(user: @user, token: activation_token)
-                .deliver_now!
+      UserMailer.account_activation(@user).deliver_now!
     end
   end
 
