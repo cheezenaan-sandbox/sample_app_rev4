@@ -4,8 +4,7 @@ class User < ApplicationRecord
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
 
   attr_accessor :remember_token
-
-  has_one :account_activation, class_name: "User::AccountActivation", dependent: :destroy
+  attr_accessor :activation_token
 
   validates :name, presence: true, length: { maximum: 50 }
   validates :email, presence: true, length: { maximum: 255 },
@@ -17,10 +16,8 @@ class User < ApplicationRecord
   # Use ActiveModel::SecurePassword
   has_secure_password
 
-  delegate :activated?, :inactivated?, to: :account_activation
-
-  scope :activated, -> { joins(:account_activation).merge(User::AccountActivation.activated) }
-  scope :inactivated, -> { joins(:account_activation).merge(User::AccountActivation.inactivated) }
+  scope :activated, -> { where(activated: true) }
+  scope :inactivated, -> { where(activated: false) }
 
   def remember
     self.remember_token = SecureToken.create

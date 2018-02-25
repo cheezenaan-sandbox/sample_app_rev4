@@ -15,7 +15,7 @@ RSpec.describe "User index", type: :system do
     let(:user_count) { 30 }
 
     before do
-      FactoryBot.create_list(:user, user_count, :dummy)
+      FactoryBot.create_list(:user, user_count, :dummy, :activated)
     end
 
     context "when logged in as an admin" do

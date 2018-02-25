@@ -17,9 +17,8 @@ FactoryBot.define do
     end
 
     trait :activated do
-      after(:create) do |user|
-        FactoryBot.create(:account_activation, user: user)
-      end
+      activated true
+      activated_at { Time.zone.now }
     end
   end
 end
