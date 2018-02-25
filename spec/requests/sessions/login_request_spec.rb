@@ -31,6 +31,15 @@ RSpec.describe "/login", type: :request do
       it { is_expected.to render_template(:new) }
     end
 
+    context "when account hasn't activated yet" do
+      let(:user) { FactoryBot.create(:user) }
+      let(:warning) { "Account not activated." }
+
+      before { log_in_as(user) }
+
+      it { is_expected.to redirect_to root_path }
+    end
+
     context "with valid information" do
       before do
         log_in_as(user, remember_me: remember_me)
