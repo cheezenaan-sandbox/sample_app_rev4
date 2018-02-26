@@ -23,7 +23,7 @@ RSpec.describe "Login", type: :system do
   end
 
   context "when filling valid information" do
-    let(:user) { FactoryBot.create(:user) }
+    let(:user) { FactoryBot.create(:user, :activated) }
 
     before do
       fill_in "Email", with: user.email

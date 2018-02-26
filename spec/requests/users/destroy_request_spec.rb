@@ -7,7 +7,7 @@ RSpec.describe "/users/:id", type: :request do
   describe "DELETE /users/:id" do
     subject(:delete_request) { -> { delete user_path(user) } }
 
-    let(:user) { FactoryBot.create(:user, :dummy) }
+    let(:user) { FactoryBot.create(:user, :dummy, :activated) }
 
     before { user.reload }
 
@@ -19,6 +19,7 @@ RSpec.describe "/users/:id", type: :request do
       let(:non_admin) do
         FactoryBot.create(
           :user,
+          :activated,
           name: "Asuka Tanaka",
           email: "anime2@example.com",
         )
@@ -30,7 +31,7 @@ RSpec.describe "/users/:id", type: :request do
     end
 
     context "when logged in as an admin" do
-      let(:admin) { FactoryBot.create(:user, :admin) }
+      let(:admin) { FactoryBot.create(:user, :admin, :activated) }
 
       before { log_in_as(admin) }
 

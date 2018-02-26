@@ -17,7 +17,7 @@ RSpec.describe "/login", type: :request do
   describe "POST /login" do
     subject { response }
 
-    let(:user) { FactoryBot.create(:user) }
+    let(:user) { FactoryBot.create(:user, :activated) }
 
     context "with invalid information" do
       let(:invalid_user) { FactoryBot.build(:user, email: email, password: password) }
@@ -29,6 +29,15 @@ RSpec.describe "/login", type: :request do
       end
 
       it { is_expected.to render_template(:new) }
+    end
+
+    context "when account hasn't activated yet" do
+      let(:user) { FactoryBot.create(:user) }
+      let(:warning) { "Account not activated." }
+
+      before { log_in_as(user) }
+
+      it { is_expected.to redirect_to root_path }
     end
 
     context "with valid information" do

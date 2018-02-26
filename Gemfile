@@ -14,11 +14,14 @@ gem "jbuilder", "~> 2.5"
 gem "mysql2", ">= 0.3.18", "< 0.5"
 gem "puma", "~> 3.7"
 gem "rails", "~> 5.1.4"
+gem "seed-fu"
 gem "will_paginate"
 
 group :development, :test do
   gem "byebug", platforms: %i[mri mingw x64_mingw]
   gem "hirb"
+  gem "letter_opener"
+  gem "letter_opener_web"
   gem "pry-byebug"
   gem "pry-coolline"
   gem "pry-doc"

@@ -4,11 +4,12 @@ class UsersController < ApplicationController
   before_action :authenticate_user!, only: %i[index edit update destroy]
 
   def index
-    @users = User.paginate(page: params[:page])
+    @users = User.activated.paginate(page: params[:page])
   end
 
   def show
     @user = User.find(params[:id])
+    return redirect_to root_url if @user.inactivated?
   end
 
   def new
@@ -18,10 +19,9 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
 
-    if @user.save
-      log_in(@user)
-      redirect_to @user
-      flash[:success] = "Welcome to the Sample App!!!!"
+    if User::CreatorService.call(user: @user)
+      redirect_to root_url
+      flash[:info] = "Please check your email to activate your account."
     else
       render "new"
     end

@@ -4,6 +4,7 @@ class User < ApplicationRecord
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
 
   attr_accessor :remember_token
+  attr_accessor :activation_token
 
   validates :name, presence: true, length: { maximum: 50 }
   validates :email, presence: true, length: { maximum: 255 },
@@ -12,10 +13,11 @@ class User < ApplicationRecord
 
   validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
 
-  before_save { self.email = email.downcase }
-
   # Use ActiveModel::SecurePassword
   has_secure_password
+
+  scope :activated, -> { where(activated: true) }
+  scope :inactivated, -> { where(activated: false) }
 
   def remember
     self.remember_token = SecureToken.create
@@ -29,5 +31,14 @@ class User < ApplicationRecord
 
   def forget
     update_attribute(:remember_digest, nil)
+  end
+
+  def inactivated?
+    !activated?
+  end
+
+  # TODO: Summarize other `#authenticated?` methods
+  def activation_authenticated?(activation_token)
+    SecureDigest.new(activation_digest).is_digest?(activation_token)
   end
 end
