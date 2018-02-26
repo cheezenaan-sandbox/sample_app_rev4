@@ -7,7 +7,8 @@ class UserMailer < ApplicationMailer
     mail to: user.email, subject: "Account activation"
   end
 
-  def password_reset
+  # TODO
+  def password_reset(user)
     @greeting = "Hi"
 
     mail to: "to@example.org"
