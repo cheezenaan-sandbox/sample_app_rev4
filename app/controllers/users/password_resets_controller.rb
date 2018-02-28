@@ -15,7 +15,9 @@ class Users::PasswordResetsController < ApplicationController
     end
   end
 
-  def edit; end
+  def edit
+    @user = User.find_by(email: params[:email])
+  end
 
   private
 
