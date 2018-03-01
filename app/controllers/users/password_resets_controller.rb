@@ -17,11 +17,48 @@ class Users::PasswordResetsController < ApplicationController
 
   def edit
     @user = User.find_by(email: params[:email])
+    redirect_if_invalid_user(user: @user, token: params[:id])
+    redirect_if_password_reset_expired(@user)
+  end
+
+  def update
+    @user = User.find_by(email: params[:email])
+    redirect_if_invalid_user(user: @user, token: params[:id])
+    redirect_if_password_reset_expired(@user)
+
+    if password_reset_update_params[:password].blank?
+      @user.errors.add(:password, :blank)
+      return render "edit"
+    end
+
+    if @user.update_attributes(password_reset_update_params)
+      log_in(@user)
+      flash[:success] = "Password has been reset..."
+      redirect_to @user
+    else
+      render "edit"
+    end
   end
 
   private
 
   def password_reset_params
     params.require(:password_reset).permit(:email)
+  end
+
+  def password_reset_update_params
+    params.require(:user).permit(:password, :password_confimation)
+  end
+
+  def redirect_if_invalid_user(user:, token:)
+    return if user&.activated? && user&.reset_authenticated?(token)
+    redirect_to root_url
+  end
+
+  def redirect_if_password_reset_expired(user)
+    return unless user.password_reset_expired?
+
+    flash[:danger] = "Password reset has been expired."
+    redirect_to new_users_password_reset_url
   end
 end

@@ -40,4 +40,12 @@ class User < ApplicationRecord
   def activation_authenticated?(activation_token)
     SecureDigest.new(activation_digest).is_digest?(activation_token)
   end
+
+  def reset_authenticated?(reset_token)
+    SecureDigest.new(reset_digest).is_digest?(reset_token)
+  end
+
+  def password_reset_expired?
+    reset_sent_at < 2.hours.ago
+  end
 end
