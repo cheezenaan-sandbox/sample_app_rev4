@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   resources :users
   namespace :users do
     resources :account_activations, only: :edit
+    resources :password_resets, only: %w[new create edit update]
   end
 
   get "/login", to: "sessions#new"

@@ -3,8 +3,7 @@
 class User < ApplicationRecord
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
 
-  attr_accessor :remember_token
-  attr_accessor :activation_token
+  attr_accessor :remember_token, :activation_token, :reset_token
 
   validates :name, presence: true, length: { maximum: 50 }
   validates :email, presence: true, length: { maximum: 255 },
@@ -40,5 +39,13 @@ class User < ApplicationRecord
   # TODO: Summarize other `#authenticated?` methods
   def activation_authenticated?(activation_token)
     SecureDigest.new(activation_digest).is_digest?(activation_token)
+  end
+
+  def reset_authenticated?(reset_token)
+    SecureDigest.new(reset_digest).is_digest?(reset_token)
+  end
+
+  def password_reset_expired?
+    reset_sent_at < 2.hours.ago
   end
 end
