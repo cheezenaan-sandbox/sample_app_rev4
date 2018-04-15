@@ -33,4 +33,18 @@ RSpec.describe Micropost, type: :model do
       it { is_expected.to be_invalid }
     end
   end
+
+  describe ".recent scope" do
+    let(:micropost_count) { 10 }
+    let(:most_recent) { FactoryBot.create(:micropost, :most_recent) }
+
+    before do
+      FactoryBot.create_list(:micropost, micropost_count, :dummy)
+      most_recent.reload
+    end
+
+    it "should be most recent first" do
+      expect(Micropost.recent.first).to eq most_recent
+    end
+  end
 end
