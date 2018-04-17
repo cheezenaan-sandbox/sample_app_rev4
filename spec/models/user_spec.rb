@@ -123,4 +123,16 @@ RSpec.describe User, type: :model do
       it { is_expected.to be false }
     end
   end
+
+  describe "has_many microposts associations" do
+    let(:user) { FactoryBot.build(:user) }
+    let(:micropost) { user.microposts.build(content: "Sound! Euphonium") }
+
+    before do
+      user.save!
+      micropost.save!
+    end
+
+    it { expect { user.destroy }.to change { Micropost.count }.by(-1) }
+  end
 end

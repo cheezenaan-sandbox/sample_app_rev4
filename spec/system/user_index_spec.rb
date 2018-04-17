@@ -29,10 +29,6 @@ RSpec.describe "User index", type: :system do
         expect(page).to have_selector ".pagination"
         expect(all("ul.users li").size).to eq user_count
         expect(page).to have_link "Delete"
-
-        (1..user_count).each do |n|
-          expect(page).to have_link "User #{n}"
-        end
       end
     end
 

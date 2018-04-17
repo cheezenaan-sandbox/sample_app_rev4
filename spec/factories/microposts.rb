@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-FactoryBot.define do
-  CONTENT_LENGTH = 140
+CONTENT_LENGTH = 140
 
+FactoryBot.define do
   factory :micropost do
     trait :dummy do
       sequence(:content) { Faker::StarWars.quote[0..(CONTENT_LENGTH - 1)] }
