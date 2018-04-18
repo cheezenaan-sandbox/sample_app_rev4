@@ -3,8 +3,9 @@
 require "rails_helper"
 
 RSpec.describe Micropost, type: :model do
-  let(:user) { FactoryBot.create(:user) }
   subject(:micropost) { user.microposts.build(content: content) }
+
+  let(:user) { FactoryBot.create(:user) }
 
   describe "#user_id" do
     let(:content) { "Sound! Euphonium" }
@@ -25,11 +26,13 @@ RSpec.describe Micropost, type: :model do
   describe "#content" do
     context "when content is blank" do
       let(:content) { " " }
+
       it { is_expected.to be_invalid }
     end
 
     context "when content is more than 140 characters" do
       let(:content) { "a" * 141 }
+
       it { is_expected.to be_invalid }
     end
   end
@@ -43,7 +46,7 @@ RSpec.describe Micropost, type: :model do
       most_recent.reload
     end
 
-    it "should be most recent first" do
+    it "is most recent first" do
       expect(Micropost.recent.first).to eq most_recent
     end
   end
