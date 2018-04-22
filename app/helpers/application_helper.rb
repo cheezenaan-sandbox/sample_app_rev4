@@ -12,6 +12,6 @@ module ApplicationHelper
     return unless manifest.fetch(path, false)
 
     host = app.config.action_controller.asset_host || app.routes.url_helpers.root_path
-    Pathname.new(host).join("assets", "frontend", manifest[path])
+    Pathname.new(host).join("assets", "frontend", manifest[path]).to_path
   end
 end
