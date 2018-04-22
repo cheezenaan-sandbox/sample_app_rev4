@@ -13,9 +13,5 @@ FactoryBot.define do
       content "Writing a short test"
       created_at { Time.zone.now }
     end
-
-    after(:build) do |micropost|
-      micropost.user = FactoryBot.create(:user, :dummy)
-    end
   end
 end
