@@ -46,7 +46,7 @@ group :development do
 end
 
 group :test do
-  gem "capybara", require: false
+  gem "capybara", "~> 3.0", require: false
   gem "factory_bot_rails"
   gem "guard"
   gem "guard-rspec", require: false
