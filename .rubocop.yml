@@ -7,6 +7,12 @@ AllCops:
     - "vendor/**/*"
     - "frontend/**/*"
 
+# ref. https://github.com/bbatsov/ruby-style-guide#indent-conditional-assignment
+Layout/EndAlignment:
+  Enabled: true
+  EnforcedStyleAlignWith: keyword
+  AutoCorrect: true
+
 Layout/IndentArray:
   EnforcedStyle: consistent
 
@@ -21,12 +27,6 @@ Lint/AmbiguousBlockAssociation:
 # Allow variable name starting with "_"
 Lint/UnderscorePrefixedVariableName:
   Enabled: false
-
-# ref. https://github.com/bbatsov/ruby-style-guide#indent-conditional-assignment
-Lint/EndAlignment:
-  Enabled: true
-  EnforcedStyleAlignWith: keyword
-  AutoCorrect: true
 
 Metrics/BlockLength:
   CountComments: false
@@ -89,5 +89,9 @@ Style/StringLiterals:
 Style/TrailingCommaInArguments:
   EnforcedStyleForMultiline: comma
 
-Style/TrailingCommaInLiteral:
+Style/TrailingCommaInArrayLiteral:
   EnforcedStyleForMultiline: comma
+
+Style/TrailingCommaInHashLiteral:
+  EnforcedStyleForMultiline: comma
+
