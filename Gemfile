@@ -8,6 +8,7 @@ git_source(:github) do |repo_name|
 end
 
 gem "bcrypt"
+gem "bootsnap"
 gem "bootstrap-will_paginate"
 gem "faker"
 gem "jbuilder", "~> 2.5"
