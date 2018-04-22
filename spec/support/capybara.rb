@@ -16,3 +16,7 @@ Capybara.register_driver :selenium_remote do |app|
 end
 
 Capybara.default_driver = :rake_test
+Capybara.server_host = "0.0.0.0"
+
+# TODO: Use puma as Capybara.server
+Capybara.server = :webrick

@@ -8,12 +8,13 @@ git_source(:github) do |repo_name|
 end
 
 gem "bcrypt"
+gem "bootsnap"
 gem "bootstrap-will_paginate"
 gem "faker"
 gem "jbuilder", "~> 2.5"
 gem "mysql2", ">= 0.3.18", "< 0.5"
 gem "puma", "~> 3.7"
-gem "rails", "~> 5.1.4"
+gem "rails", "~> 5.2.0"
 gem "seed-fu"
 gem "will_paginate"
 

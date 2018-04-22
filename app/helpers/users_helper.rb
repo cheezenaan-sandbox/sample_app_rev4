@@ -7,6 +7,7 @@ module UsersHelper
     gravatar_id = Digest::MD5.hexdigest(user.email.downcase)
     gravatar_url = Pathname.new("https://secure.gravatar.com/avatar/")
                            .join(gravatar_id, "?s=#{size}")
+                           .to_path
     image_tag(gravatar_url, alt: user.name, class: "gravatar")
   end
 end
