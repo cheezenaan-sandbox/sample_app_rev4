@@ -7,9 +7,10 @@ RSpec.describe "/micropost", type: :request do
     subject { response }
 
     let(:user) { FactoryBot.create(:user, :activated, :with_microposts) }
+    let(:micropost) { user.microposts.first}
 
     before do
-      delete micropost_path(user.microposts.first)
+      delete micropost_path(micropost)
     end
 
     context "when not logged in" do
