@@ -7,6 +7,10 @@ Rails.application.routes.draw do
   get "/about", to: "static_pages#about"
   get "/contact", to: "static_pages#contact"
 
+  get "/login", to: "sessions#new"
+  post "/login", to: "sessions#create"
+  delete "/logout", to: "sessions#destroy"
+
   get "/signup", to: "users#new"
   post "/signup", to: "users#create"
   resources :users
@@ -15,9 +19,7 @@ Rails.application.routes.draw do
     resources :password_resets, only: %w[new create edit update]
   end
 
-  get "/login", to: "sessions#new"
-  post "/login", to: "sessions#create"
-  delete "/logout", to: "sessions#destroy"
+  resources :microposts, only: %w[create destroy]
 
   mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
 end
