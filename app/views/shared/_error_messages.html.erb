@@ -1,6 +1,6 @@
 <div id="error_explanation">
   <div class="alert alert-danger">
-    <%= "The form contains #{pluralize(form.errors.count, "error")}" %>
+    <%= "The form contains #{pluralize(form.errors.count, "error", "errors")}" %>
   </div>
   <ul>
     <% form.errors.full_messages.each do |message| %>
