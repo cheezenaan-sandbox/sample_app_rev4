@@ -141,3 +141,5 @@ node_modules/
 /public/assets
 
 yarn-error.log
+
+/storage/
