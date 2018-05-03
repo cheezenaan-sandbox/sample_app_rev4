@@ -53,6 +53,6 @@ class User < ApplicationRecord
 
   # TODO
   def feeds
-    Micropost.where(user_id: id).recent
+    Micropost.includes(:user).with_attached_picture.where(user_id: id).recent
   end
 end
