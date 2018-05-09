@@ -17,6 +17,7 @@ gem "puma", "~> 3.7"
 gem "rails", "~> 5.2.0"
 gem "seed-fu"
 gem "will_paginate"
+gem "mini_magick"
 
 group :development, :test do
   gem "byebug", platforms: %i[mri mingw x64_mingw]
