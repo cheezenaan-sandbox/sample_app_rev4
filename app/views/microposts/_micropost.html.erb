@@ -3,7 +3,7 @@
   <span class="user"><%= link_to micropost.user.name, micropost.user %></span>
   <span class="content">
     <%= micropost.content %>
-    <%= image_tag micropost.picture if micropost.picture.attached? %>
+    <%= image_tag micropost.picture.variant(resize: "400x400") if micropost.picture.attached? %>
   </span>
   <span class="timestamp">
     Posted <%= time_ago_in_words(micropost.created_at) %> ago.
