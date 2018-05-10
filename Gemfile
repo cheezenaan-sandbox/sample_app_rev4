@@ -7,17 +7,18 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
+gem "aws-sdk-s3", require: false
 gem "bcrypt"
 gem "bootsnap"
 gem "bootstrap-will_paginate"
 gem "faker"
 gem "jbuilder", "~> 2.5"
+gem "mini_magick"
 gem "mysql2", ">= 0.3.18", "< 0.5"
 gem "puma", "~> 3.7"
 gem "rails", "~> 5.2.0"
 gem "seed-fu"
 gem "will_paginate"
-gem "mini_magick"
 
 group :development, :test do
   gem "byebug", platforms: %i[mri mingw x64_mingw]
