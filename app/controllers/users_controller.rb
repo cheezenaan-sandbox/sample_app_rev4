@@ -11,7 +11,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     return redirect_to root_url if @user.inactivated?
 
-    @microposts = @user.microposts.recent.paginate(page: params[:page])
+    @microposts = @user.feeds.paginate(page: params[:page])
   end
 
   def new
