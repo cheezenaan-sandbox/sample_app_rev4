@@ -141,3 +141,8 @@ node_modules/
 /public/assets
 
 yarn-error.log
+
+/storage/
+
+# Ignore master key for decrypting credentials and more.
+/config/master.key

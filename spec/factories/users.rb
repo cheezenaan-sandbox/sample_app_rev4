@@ -20,5 +20,11 @@ FactoryBot.define do
       activated true
       activated_at { Time.zone.now }
     end
+
+    trait :with_microposts do
+      after(:create) do |user|
+        50.times { FactoryBot.create(:micropost, :dummy, user: user) }
+      end
+    end
   end
 end
