@@ -2,9 +2,17 @@
 
 FactoryBot.define do
   factory :user do
-    name "Kumiko Oumae"
-    email "anime@example.com"
-    password "euphonium"
+    trait :kumiko do
+      name "Kumiko Oumae"
+      email "kumiko-eupho@example.com"
+      password "euphonium"
+    end
+
+    trait :asuka do
+      name "Asuka Tanaka"
+      email "asuka-eupho@example.com"
+      password "euphonium"
+    end
 
     trait :dummy do
       sequence(:name) { |n| "User #{n}" }

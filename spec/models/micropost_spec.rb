@@ -5,7 +5,7 @@ require "rails_helper"
 RSpec.describe Micropost, type: :model do
   subject(:micropost) { user.microposts.build(content: content) }
 
-  let(:user) { FactoryBot.create(:user) }
+  let(:user) { FactoryBot.create(:user, :kumiko) }
 
   describe "#user_id" do
     let(:content) { "Sound! Euphonium" }

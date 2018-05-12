@@ -5,7 +5,7 @@ require "rails_helper"
 RSpec.describe "User profile", type: :system do
   subject { page }
 
-  let(:user) { FactoryBot.create(:user, :activated, :with_microposts) }
+  let(:user) { FactoryBot.create(:user, :kumiko, :activated, :with_microposts) }
 
   context "when access to profile page" do
     before do

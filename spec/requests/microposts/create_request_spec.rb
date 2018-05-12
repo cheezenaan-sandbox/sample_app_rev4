@@ -15,7 +15,7 @@ RSpec.describe "/microposts", type: :request do
     end
 
     context "when logged in" do
-      let(:user) { FactoryBot.create(:user, :activated) }
+      let(:user) { FactoryBot.create(:user, :kumiko, :activated) }
 
       before { log_in_as(user) }
 

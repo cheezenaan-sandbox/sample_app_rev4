@@ -125,7 +125,7 @@ RSpec.describe User, type: :model do
   end
 
   describe "has_many microposts associations" do
-    let(:user) { FactoryBot.build(:user) }
+    let(:user) { FactoryBot.build(:user, :kumiko) }
     let(:micropost) { user.microposts.build(content: "Sound! Euphonium") }
 
     before do
