@@ -6,7 +6,7 @@ RSpec.describe SessionHelper do
   describe "current_user" do
     subject { current_user }
 
-    let(:user) { FactoryBot.create(:user, :activated) }
+    let(:user) { FactoryBot.create(:user, :kumiko, :activated) }
 
     before { remember(user) }
 

@@ -17,10 +17,10 @@ RSpec.describe "/login", type: :request do
   describe "POST /login" do
     subject { response }
 
-    let(:user) { FactoryBot.create(:user, :activated) }
+    let(:user) { FactoryBot.create(:user, :kumiko, :activated) }
 
     context "with invalid information" do
-      let(:invalid_user) { FactoryBot.build(:user, email: email, password: password) }
+      let(:invalid_user) { FactoryBot.build(:user, :kumiko, email: email, password: password) }
       let(:email) { "invalid_email" }
       let(:password) { "invalid" }
 
@@ -32,7 +32,7 @@ RSpec.describe "/login", type: :request do
     end
 
     context "when account hasn't activated yet" do
-      let(:user) { FactoryBot.create(:user) }
+      let(:user) { FactoryBot.create(:user, :kumiko) }
       let(:warning) { "Account not activated." }
 
       before { log_in_as(user) }

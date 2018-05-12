@@ -6,7 +6,7 @@ RSpec.describe "/micropost", type: :request do
   describe "DELETE /micropost/:id" do
     subject(:destroy_request) { -> { delete micropost_path(micropost) } }
 
-    let(:user) { FactoryBot.create(:user, :activated, :with_microposts) }
+    let(:user) { FactoryBot.create(:user, :kumiko, :activated, :with_microposts) }
     let(:micropost) { user.microposts.first }
 
     context "when not logged in" do
@@ -14,7 +14,7 @@ RSpec.describe "/micropost", type: :request do
     end
 
     context "when deleting other user's micropost" do
-      let(:another_user) { FactoryBot.create(:user, :activated, :dummy) }
+      let(:another_user) { FactoryBot.create(:user, :kumiko, :activated, :dummy) }
       let(:micropost) { FactoryBot.create(:micropost, :dummy, user: another_user) }
 
       before do
