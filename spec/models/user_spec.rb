@@ -135,4 +135,30 @@ RSpec.describe User, type: :model do
 
     it { expect { user.destroy }.to change { Micropost.count }.by(-1) }
   end
+
+  describe "#following?" do
+    let(:kumiko) { FactoryBot.create(:user, :kumiko, :activated) }
+    let(:asuka) { FactoryBot.create(:user, :asuka, :activated) }
+
+    subject { kumiko.following?(asuka) }
+
+    context "when not followed" do
+      it { is_expected.to be false }
+    end
+
+    context "when followed" do
+      before { kumiko.follow(asuka) }
+
+      it { is_expected.to be true }
+    end
+
+    context "when unfollowed" do
+      before do
+        kumiko.follow(asuka)
+        kumiko.unfollow(asuka)
+      end
+
+      it { is_expected.to be false }
+    end
+  end
 end
