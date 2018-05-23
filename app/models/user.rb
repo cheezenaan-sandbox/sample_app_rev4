@@ -59,4 +59,16 @@ class User < ApplicationRecord
   def feeds
     microposts.recent.with_attached_picture
   end
+
+  def follow(other)
+    active_relationships.create(followed_id: other.id)
+  end
+
+  def unfollow(other)
+    active_relationships.find_by(followed_id: other).destroy
+  end
+
+  def following?(other)
+    following.include?(other)
+  end
 end
