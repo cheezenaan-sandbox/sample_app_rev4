@@ -19,4 +19,4 @@ users = (2..100).map do |n|
   }
 end
 
-User.seed(:id, users)
+User.seed(users)
