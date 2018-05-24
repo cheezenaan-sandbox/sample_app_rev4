@@ -13,7 +13,15 @@ Rails.application.routes.draw do
 
   get "/signup", to: "users#new"
   post "/signup", to: "users#create"
-  resources :users
+
+  resources :users do
+    member do
+      # なぜか path の postfix に "_index" がついてしまう
+      resources :following, only: :index, module: :users, as: "following_user"
+      resources :followers, only: :index, module: :users, as: "followers_user"
+    end
+  end
+
   namespace :users do
     resources :account_activations, only: :edit
     resources :password_resets, only: %w[new create edit update]
