@@ -12,5 +12,13 @@ RSpec.describe "/users/:id/following", type: :request do
     context "when not logged in" do
       it { is_expected.to redirect_to login_path }
     end
+
+    context "when logged in" do
+      before do
+        log_in_as(user)
+      end
+
+      it { is_expected.to render_template("users/show_follow") }
+    end
   end
 end
