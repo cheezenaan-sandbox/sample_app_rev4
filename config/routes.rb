@@ -28,6 +28,7 @@ Rails.application.routes.draw do
   end
 
   resources :microposts, only: %w[create destroy]
+  resources :relationships, only: %w[create destroy]
 
   mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
 end
