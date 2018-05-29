@@ -59,9 +59,9 @@ class User < ApplicationRecord
     reset_sent_at < 2.hours.ago
   end
 
-  # TODO
   def feeds
-    microposts.recent.with_attached_picture
+    scoped_posts = Micropost.includes(:user).recent.with_attached_picture
+    scoped_posts.of_user(following).or(scoped_posts.of_user(self))
   end
 
   def follow(other)

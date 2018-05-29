@@ -161,4 +161,28 @@ RSpec.describe User, type: :model do
       it { is_expected.to be false }
     end
   end
+
+  describe "#feeds" do
+    let(:kumiko) { FactoryBot.create(:user, :kumiko, :activated, :with_microposts) }
+    let(:asuka) { FactoryBot.create(:user, :asuka, :activated, :with_microposts) }
+    let(:reina) { FactoryBot.create(:user, :dummy, :activated, :with_microposts) }
+
+    subject(:feeds) { kumiko.feeds }
+
+    before do
+      kumiko.follow(asuka)
+    end
+
+    it "includes microposts of user itself" do
+      expect(feeds).to include(kumiko.microposts.first)
+    end
+
+    it "includes microposts of user following" do
+      expect(feeds).to include(asuka.microposts.first)
+    end
+
+    it "doesn't include microposts of user NOT following" do
+      expect(feeds).not_to include(reina.microposts)
+    end
+  end
 end
