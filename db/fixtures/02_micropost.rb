@@ -9,5 +9,5 @@ users.each do |user|
       user: user,
     }
   end
-  Micropost.seed(:id, microposts)
+  Micropost.seed(microposts)
 end

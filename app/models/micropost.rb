@@ -11,6 +11,7 @@ class Micropost < ApplicationRecord
   has_one_attached :picture
 
   scope :recent, -> { order(created_at: :desc) }
+  scope :of_user, ->(user) { where(user_id: user) }
 
   private
 

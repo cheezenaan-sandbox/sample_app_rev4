@@ -13,13 +13,13 @@ module App
     config.generators do |g|
       g.assets false
       g.helper false
-      g.test_framekwork :rspec,
-                        fixtures: true,
-                        view_specs: false,
-                        helper_specs: false,
-                        routing_specs: false,
-                        controller_specs: false,
-                        request_specs: true
+      g.test_framework :rspec,
+                       fixtures: true,
+                       view_specs: false,
+                       helper_specs: false,
+                       routing_specs: false,
+                       controller_specs: false,
+                       request_specs: true
     end
 
     config.active_record.default_timezone = :local
