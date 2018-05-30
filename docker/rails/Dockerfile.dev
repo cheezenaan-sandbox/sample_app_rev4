@@ -3,7 +3,7 @@ LABEL maintainer "cheezenaan <cheezenaan@gmail.com>"
 
 ENV \
   APP_ROOT="/app" \
-  DEV_PACKAGES="build-base less libxml2-dev libxslt-dev tzdata" \
+  DEV_PACKAGES="build-base less libxml2-dev libxslt-dev tzdata openssl" \
   ENTRYKIT_VERSION="0.4.0" \
   LANG="C.UTF-8" \
   RAILS_PACKAGES="mysql-dev imagemagick"

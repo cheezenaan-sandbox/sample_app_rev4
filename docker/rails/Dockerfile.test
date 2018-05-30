@@ -3,7 +3,7 @@ LABEL maintainer "cheezenaan <cheezenaan@gmail.com>"
 
 ENV \
   APP_ROOT="/app" \
-  DEV_PACKAGES="build-base libxml2-dev libxslt-dev tzdata" \
+  DEV_PACKAGES="build-base libxml2-dev libxslt-dev tzdata openssl" \
   DOCKERIZE_VERSION="v0.3.0" \
   ENTRYKIT_VERSION="0.4.0" \
   LANG="C.UTF-8" \
