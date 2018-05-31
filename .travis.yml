@@ -34,5 +34,3 @@ deploy:
   app:
     master: sample-rev4
   skip_cleanup: true
-  run:
-    - rake db:migrate
