@@ -9,7 +9,7 @@
     "autoprefixer": "7.2.6",
     "babel-core": "6.26.0",
     "babel-loader": "8.0.4",
-    "babel-preset-env": "1.6.1",
+    "babel-preset-env": "1.7.0",
     "css-loader": "0.28.9",
     "eslint": "4.19.1",
     "eslint-config-airbnb": "16.1.0",
