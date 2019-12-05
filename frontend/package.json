@@ -10,7 +10,7 @@
     "babel-core": "6.26.3",
     "babel-loader": "8.0.4",
     "babel-preset-env": "1.7.0",
-    "css-loader": "0.28.9",
+    "css-loader": "0.28.11",
     "eslint": "4.19.1",
     "eslint-config-airbnb": "16.1.0",
     "eslint-config-prettier": "2.10.0",
