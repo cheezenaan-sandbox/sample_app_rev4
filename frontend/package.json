@@ -19,7 +19,7 @@
     "eslint-plugin-prettier": "2.5.0",
     "eslint-plugin-react": "7.5.1",
     "extract-text-webpack-plugin": "3.0.2",
-    "file-loader": "1.1.6",
+    "file-loader": "1.1.11",
     "node-sass": "4.7.2",
     "postcss-loader": "2.0.10",
     "prettier": "1.15.2",
