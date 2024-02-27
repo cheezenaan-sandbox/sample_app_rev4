@@ -16,7 +16,7 @@ gem "jbuilder", "~> 2.5"
 gem "mini_magick"
 gem "mysql2", ">= 0.3.18", "< 0.5"
 gem "puma", "~> 3.7"
-gem "rails", "~> 5.2.0"
+gem "rails", "~> 6.1.0"
 gem "seed-fu"
 gem "will_paginate"
 
