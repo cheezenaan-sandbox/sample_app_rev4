@@ -2676,8 +2676,9 @@ jest-docblock@^21.0.0:
   resolved "https://registry.yarnpkg.com/jest-docblock/-/jest-docblock-21.2.0.tgz#51529c3b30d5fd159da60c27ceedc195faf8d414"
 
 jquery@^3.3.1:
-  version "3.3.1"
-  resolved "https://registry.yarnpkg.com/jquery/-/jquery-3.3.1.tgz#958ce29e81c9790f31be7792df5d4d95fc57fbca"
+  version "3.8.0"
+  resolved "https://registry.yarnpkg.com/jquery/-/jquery-3.8.0.tgz#3bf83324052cc9e7148718e9d6ea3cde1b2b9f5a"
+  integrity sha512-AOYt0viqPysMUTq45O8gF9DuOnBT3Il/8WtM/TT8z/2QeGsZ70ImwSJtNFxznn2R71v8yIgaEunOGo82OY/f0g==
 
 js-base64@^2.1.8, js-base64@^2.1.9:
   version "2.4.1"
